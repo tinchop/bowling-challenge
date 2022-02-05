@@ -1,5 +1,4 @@
 import com.tinchop.bowling.factory.FrameFactory;
-import com.tinchop.bowling.model.frame.Frame;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,7 +30,7 @@ public class FrameTest {
         var frames = frameFactory.createFrames(chances);
 
         for (int i = 0; i < frames.size(); i++) {
-            Frame frame = frames.get(i);
+            var frame = frames.get(i);
             Assertions.assertEquals((i + 1) * MAX_FRAME_SCORE, frame.getScore());
         }
     }
@@ -74,7 +73,7 @@ public class FrameTest {
         var frames = frameFactory.createFrames(chances);
 
         for (int i = 0; i < frames.size(); i++) {
-            Frame frame = frames.get(i);
+            var frame = frames.get(i);
             Assertions.assertEquals(expectedFrameScores.get(i), frame.getScore());
         }
     }

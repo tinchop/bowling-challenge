@@ -32,7 +32,7 @@ public class FrameFactoryTest {
                 "2", "2",
                 "5", "3");
         var frames = frameFactory.createFrames(chances);
-        Assertions.assertEquals(frames.size(), FRAMES_PER_GAME);
+        Assertions.assertEquals(FRAMES_PER_GAME, frames.size());
     }
 
     @Test
@@ -45,7 +45,7 @@ public class FrameFactoryTest {
                 STRIKE, STRIKE,
                 STRIKE, STRIKE);
         var frames = frameFactory.createFrames(chances);
-        Assertions.assertEquals(frames.size(), FRAMES_PER_GAME);
+        Assertions.assertEquals(FRAMES_PER_GAME, frames.size());
 
     }
 
@@ -63,7 +63,7 @@ public class FrameFactoryTest {
                 "9", PAR,
                 "1", PAR, "2");
         var frames = frameFactory.createFrames(chances);
-        Assertions.assertEquals(frames.size(), FRAMES_PER_GAME);
+        Assertions.assertEquals(FRAMES_PER_GAME, frames.size());
 
     }
 

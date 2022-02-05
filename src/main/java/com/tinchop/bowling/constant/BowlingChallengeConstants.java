@@ -9,5 +9,6 @@ public class BowlingChallengeConstants {
     public final static Integer MAX_CHANCE_SCORE = 10;
     public final static Integer MAX_FRAME_SCORE = 30;
     public final static Integer FOUL_SCOURE = 0;
+    public final static String COLUMN_DELIMITER = "\t";
 
 }

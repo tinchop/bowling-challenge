@@ -30,7 +30,7 @@ public abstract class Frame {
         }
     }
 
-    protected Integer giveStrikeBonusToPrevious() {
+    protected Integer sayStrikeBonusToPrevious() {
         return parseChance(firstChance) + parseChance(secondChance);
     }
 
