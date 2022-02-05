@@ -27,6 +27,8 @@ public final class FrameFactory {
                 frame.setSecondChance(chances.get(i + 1));
                 if (chances.size() > i + 2) {
                     frame.setThirdChance(chances.get(i + 2));
+                } else {
+                    frame.setThirdChance("");
                 }
                 frames.add(frame);
                 i = chances.size();

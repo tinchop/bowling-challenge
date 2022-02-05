@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.NonNull;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 
@@ -19,9 +20,9 @@ public class Player implements Printable {
 
     @Override
     public String getPrintableText() {
-        var nameLine = name + NEW_LINE;
-        var pinfallsLine = OUTPUT_PINFALLS + NEW_LINE;
-        var scoreLine = OUTPUT_SCORE + NEW_LINE;
+        var nameLine = name + OUTPUT_NEW_LINE;
+        var pinfallsLine = OUTPUT_PINFALLS + frames.stream().map(frame -> frame.getPrintableText().split(OUTPUT_NEW_LINE)[0]).collect(Collectors.joining()) + OUTPUT_NEW_LINE;
+        var scoreLine = OUTPUT_SCORE + frames.stream().map(frame -> frame.getPrintableText().split(OUTPUT_NEW_LINE)[1]).collect(Collectors.joining()) + OUTPUT_NEW_LINE;
         return nameLine + pinfallsLine + scoreLine;
     }
 }

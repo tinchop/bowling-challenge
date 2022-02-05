@@ -1,6 +1,7 @@
 package com.tinchop.bowling.model.frame;
 
-import static com.tinchop.bowling.constant.BowlingChallengeConstants.MAX_CHANCE_SCORE;
+import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
+import static com.tinchop.bowling.constant.BowlingChallengeConstants.OUTPUT_TAB;
 
 public class Strike extends Frame {
 
@@ -15,6 +16,8 @@ public class Strike extends Frame {
 
     @Override
     public String getPrintableText() {
-        return null;
+        var pinfallsLine = OUTPUT_TAB + firstChance + OUTPUT_TAB + OUTPUT_NEW_LINE;
+        var scoreLine = getScore() + OUTPUT_TAB + OUTPUT_TAB;
+        return pinfallsLine + scoreLine;
     }
 }
