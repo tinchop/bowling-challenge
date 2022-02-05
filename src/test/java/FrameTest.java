@@ -1,12 +1,12 @@
 import com.tinchop.bowling.factory.ChancesValidator;
 import com.tinchop.bowling.factory.FrameFactory;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FrameTest {
 
@@ -22,33 +22,33 @@ public class FrameTest {
     @Test
     public void getScoreAllStrikesTest() {
         var chances = List.of(
-                STRIKE, STRIKE,
-                STRIKE, STRIKE,
-                STRIKE, STRIKE,
-                STRIKE, STRIKE,
-                STRIKE, STRIKE,
-                STRIKE, STRIKE);
+                INPUT_STRIKE, INPUT_STRIKE,
+                INPUT_STRIKE, INPUT_STRIKE,
+                INPUT_STRIKE, INPUT_STRIKE,
+                INPUT_STRIKE, INPUT_STRIKE,
+                INPUT_STRIKE, INPUT_STRIKE,
+                INPUT_STRIKE, INPUT_STRIKE);
         var frames = frameFactory.createFrames(chances);
 
         for (int i = 0; i < frames.size(); i++) {
             var frame = frames.get(i);
-            Assertions.assertEquals((i + 1) * MAX_FRAME_SCORE, frame.getScore());
+            assertEquals((i + 1) * MAX_FRAME_SCORE, frame.getScore());
         }
     }
 
     @Test
     public void getScoreAllParsTest() {
         var chances = List.of(
-                "0", PAR,
-                "1", PAR,
-                "5", PAR,
-                "2", PAR,
-                "9", PAR,
-                "1", PAR,
-                "5", PAR,
-                "2", PAR,
-                "9", PAR,
-                "1", PAR, "2");
+                "8", "2",
+                "1", "9",
+                "5", "5",
+                "2", "8",
+                "9", "1",
+                "1", "9",
+                "5", "5",
+                "2", "8",
+                "9", "1",
+                "1", "9", "2");
         var expectedFrameScores = List.of(11, 26, 38, 57, 68, 83, 95, 114, 125, 137);
         assertScores(chances, expectedFrameScores);
     }
@@ -56,16 +56,16 @@ public class FrameTest {
     @Test
     public void getScore1Test() {
         var chances = List.of(
-                "3", PAR,
+                "3", "7",
                 "6", "3",
-                STRIKE,
+                INPUT_STRIKE,
                 "8", "1",
-                STRIKE,
-                STRIKE,
+                INPUT_STRIKE,
+                INPUT_STRIKE,
                 "9", "0",
-                "7", PAR,
+                "7", "3",
                 "4", "4",
-                STRIKE, "9", "0");
+                INPUT_STRIKE, "9", "0");
         var expectedFrameScores = List.of(16, 25, 44, 53, 82, 101, 110, 124, 132, 151);
         assertScores(chances, expectedFrameScores);
     }
@@ -75,7 +75,7 @@ public class FrameTest {
 
         for (int i = 0; i < frames.size(); i++) {
             var frame = frames.get(i);
-            Assertions.assertEquals(expectedFrameScores.get(i), frame.getScore());
+            assertEquals(expectedFrameScores.get(i), frame.getScore());
         }
     }
 

@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
+import static com.tinchop.bowling.constant.BowlingChallengeConstants.FRAMES_PER_GAME;
+import static com.tinchop.bowling.constant.BowlingChallengeConstants.INPUT_STRIKE;
 
 public class FrameFactoryTest {
 
@@ -39,12 +40,12 @@ public class FrameFactoryTest {
     @Test
     public void createFramesAllStrikesTest() {
         var chances = List.of(
-                STRIKE, STRIKE,
-                STRIKE, STRIKE,
-                STRIKE, STRIKE,
-                STRIKE, STRIKE,
-                STRIKE, STRIKE,
-                STRIKE, STRIKE);
+                INPUT_STRIKE, INPUT_STRIKE,
+                INPUT_STRIKE, INPUT_STRIKE,
+                INPUT_STRIKE, INPUT_STRIKE,
+                INPUT_STRIKE, INPUT_STRIKE,
+                INPUT_STRIKE, INPUT_STRIKE,
+                INPUT_STRIKE, INPUT_STRIKE);
         var frames = frameFactory.createFrames(chances);
         Assertions.assertEquals(FRAMES_PER_GAME, frames.size());
 
@@ -53,16 +54,16 @@ public class FrameFactoryTest {
     @Test
     public void createFramesAllParsTest() {
         var chances = List.of(
-                "0", PAR,
-                "1", PAR,
-                "5", PAR,
-                "2", PAR,
-                "9", PAR,
-                "1", PAR,
-                "5", PAR,
-                "2", PAR,
-                "9", PAR,
-                "1", PAR, "2");
+                "0", "10",
+                "1", "9",
+                "5", "5",
+                "2", "8",
+                "9", "1",
+                "1", "9",
+                "5", "5",
+                "2", "8",
+                "9", "1",
+                "1", "9", "2");
         var frames = frameFactory.createFrames(chances);
         Assertions.assertEquals(FRAMES_PER_GAME, frames.size());
 

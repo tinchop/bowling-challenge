@@ -3,7 +3,7 @@ package com.tinchop.bowling.model.frame;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.OUTPUT_TAB;
 
-public class Strike extends Frame {
+public class StrikeFrame extends Frame {
 
     protected void calculateScore() {
         super.calculateScore();

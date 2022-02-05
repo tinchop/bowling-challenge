@@ -19,7 +19,7 @@ public class GameFileParser {
 
         var scanner = createScanner(filePath);
 
-        var parsedGame = new HashMap<String, List<String>>();
+        var parsedGame = new LinkedHashMap<String, List<String>>();
         while (scanner.hasNext()) {
             var line = lineValidator.validateLine(scanner.next());
             var splitLine = line.split(COLUMN_DELIMITER);
@@ -28,7 +28,7 @@ public class GameFileParser {
                 if (chances == null) {
                     chances = new ArrayList<>();
                 }
-                chances.add(splitLine[1]);
+                chances.add(splitLine[1].trim());
                 return chances;
             });
 

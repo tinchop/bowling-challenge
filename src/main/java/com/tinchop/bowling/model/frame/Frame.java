@@ -37,9 +37,9 @@ public abstract class Frame implements Printable {
     }
 
     protected Integer parseChance(String chance) {
-        if (STRIKE.equals(chance)) {
+        if (OUTPUT_STRIKE.equals(chance)) {
             return MAX_CHANCE_SCORE;
-        } else if (PAR.equals(chance)) {
+        } else if (OUTPUT_SPARE.equals(chance)) {
             return MAX_CHANCE_SCORE - Integer.parseInt(firstChance);
         } else if (FOUL.equals(chance)) {
             return FOUL_SCORE;
