@@ -5,6 +5,7 @@ import com.tinchop.bowling.factory.FrameFactory;
 import com.tinchop.bowling.model.Game;
 import com.tinchop.bowling.model.Player;
 import com.tinchop.bowling.parser.GameFileParser;
+import com.tinchop.bowling.parser.InvalidLineException;
 import com.tinchop.bowling.parser.LineValidator;
 
 import java.io.FileNotFoundException;
@@ -30,7 +31,7 @@ public class BowlingChallenge {
 
             System.out.println(game.getPrintableText());
 
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | InvalidLineException e) {
             System.err.println(e.getMessage());
             System.exit(EXIT_CODE_UNSUCCESSFUL);
         }
