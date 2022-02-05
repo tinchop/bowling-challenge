@@ -13,5 +13,8 @@ public class Strike extends Frame {
         return MAX_CHANCE_SCORE + parseChance(nextFrame.firstChance);
     }
 
-
+    @Override
+    public String getPrintableText() {
+        return null;
+    }
 }

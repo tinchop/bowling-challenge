@@ -36,4 +36,19 @@ public class GameFileParserTest {
         }
     }
 
+    @Test
+    public void parsePerfectFileTest() {
+        try {
+            var expectedPlayersCount = 1;
+            var expectedCarlChancesCount = 12;
+            var parsedGame = parser.parse("src/test/resources/positive/perfect.txt");
+
+            assertEquals(expectedPlayersCount, parsedGame.keySet().size());
+            assertEquals(expectedCarlChancesCount, parsedGame.get("Carl").size());
+
+        } catch (FileNotFoundException e) {
+            fail(e);
+        }
+    }
+
 }

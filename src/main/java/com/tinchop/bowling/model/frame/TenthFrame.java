@@ -12,4 +12,8 @@ public class TenthFrame extends Frame {
         score += (parseChance(firstChance) + parseChance(secondChance) + parseChance(thirdChance));
     }
 
+    @Override
+    public String getPrintableText() {
+        return null;
+    }
 }

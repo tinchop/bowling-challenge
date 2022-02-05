@@ -1,6 +1,7 @@
 package com.tinchop.bowling.factory;
 
 import com.tinchop.bowling.model.frame.*;
+import lombok.Builder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +9,14 @@ import java.util.List;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.PAR;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.STRIKE;
 
+@Builder
 public final class FrameFactory {
 
+    private ChancesValidator chancesValidator;
+
     public List<Frame> createFrames(List<String> chances) {
+        chancesValidator.validateChances(chances);
+
         var frames = new ArrayList<Frame>();
 
         for (int i = 0; i < chances.size(); i++) {

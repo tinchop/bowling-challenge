@@ -1,10 +1,11 @@
 package com.tinchop.bowling.model.frame;
 
+import com.tinchop.bowling.model.Printable;
 import lombok.Setter;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 
-public abstract class Frame {
+public abstract class Frame implements Printable {
 
     @Setter
     protected String firstChance;
@@ -40,7 +41,7 @@ public abstract class Frame {
         } else if (PAR.equals(chance)) {
             return MAX_CHANCE_SCORE - Integer.parseInt(firstChance);
         } else if (FOUL.equals(chance)) {
-            return FOUL_SCOURE;
+            return FOUL_SCORE;
         } else return Integer.parseInt(chance);
     }
 

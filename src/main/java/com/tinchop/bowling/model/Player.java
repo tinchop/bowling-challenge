@@ -2,16 +2,26 @@ package com.tinchop.bowling.model;
 
 import com.tinchop.bowling.model.frame.Frame;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.NonNull;
 
 import java.util.List;
 
+import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
+
 
 @Builder
-public class Player {
+public class Player implements Printable {
 
-    @Getter
+    @NonNull
     private String name;
+    @NonNull
     private List<Frame> frames;
 
+    @Override
+    public String getPrintableText() {
+        var nameLine = name + NEW_LINE;
+        var pinfallsLine = OUTPUT_PINFALLS + NEW_LINE;
+        var scoreLine = OUTPUT_SCORE + NEW_LINE;
+        return nameLine + pinfallsLine + scoreLine;
+    }
 }

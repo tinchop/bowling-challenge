@@ -1,3 +1,4 @@
+import com.tinchop.bowling.factory.ChancesValidator;
 import com.tinchop.bowling.factory.FrameFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +15,7 @@ public class FrameTest {
     @BeforeEach
     public void init() {
         if (frameFactory == null) {
-            frameFactory = new FrameFactory();
+            frameFactory = FrameFactory.builder().chancesValidator(new ChancesValidator()).build();
         }
     }
 

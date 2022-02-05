@@ -9,4 +9,8 @@ public class Par extends Frame {
         score += (MAX_CHANCE_SCORE + parseChance(nextFrame.firstChance));
     }
 
+    @Override
+    public String getPrintableText() {
+        return null;
+    }
 }

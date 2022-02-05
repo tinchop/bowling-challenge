@@ -7,4 +7,8 @@ public class OpenFrame extends Frame {
         score += (parseChance(firstChance) + parseChance(secondChance));
     }
 
+    @Override
+    public String getPrintableText() {
+        return null;
+    }
 }
