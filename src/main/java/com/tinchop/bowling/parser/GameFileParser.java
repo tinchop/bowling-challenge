@@ -1,5 +1,6 @@
 package com.tinchop.bowling.parser;
 
+import com.tinchop.bowling.common.InvalidInputException;
 import lombok.Builder;
 import lombok.NonNull;
 
@@ -8,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.COLUMN_DELIMITER;
+import static com.tinchop.bowling.constant.BowlingChallengeMessages.EMPTY_FILE_MSG;
 
 @Builder
 public class GameFileParser {
@@ -35,6 +37,9 @@ public class GameFileParser {
         }
 
         scanner.close();
+
+        if (parsedGame.isEmpty()) throw new InvalidInputException(EMPTY_FILE_MSG);
+
         return parsedGame;
     }
 

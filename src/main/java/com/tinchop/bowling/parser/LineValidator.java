@@ -1,5 +1,6 @@
 package com.tinchop.bowling.parser;
 
+import com.tinchop.bowling.common.InvalidInputException;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
@@ -17,8 +18,8 @@ public class LineValidator {
 
     public String validateLine(String line) {
         rules.forEach(rule -> {
-            if (rule.breaksRule(line)) {
-                throw new InvalidLineException(fullRuleMessage(rule.getMessage(), line));
+            if (rule.brokenBy(line)) {
+                throw new InvalidInputException(fullRuleMessage(rule.getMessage(), line));
             }
         });
         return line;
@@ -30,7 +31,7 @@ public class LineValidator {
 
     private interface LineValidationRule {
 
-        boolean breaksRule(String line);
+        boolean brokenBy(String line);
         String getMessage();
 
     }
@@ -38,7 +39,7 @@ public class LineValidator {
     private static class NumericOrFoulScoreValue implements LineValidationRule {
 
         @Override
-        public boolean breaksRule(String line) {
+        public boolean brokenBy(String line) {
             var splitLine = line.split(COLUMN_DELIMITER);
             return splitLine.length > 1 && !StringUtils.isNumeric(splitLine[1].trim()) && !FOUL.equals(splitLine[1].trim());
         }
