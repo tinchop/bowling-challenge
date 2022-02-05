@@ -1,4 +1,4 @@
-package com.tinchop.bowling.model;
+package com.tinchop.bowling.model.frame;
 
 import lombok.Setter;
 

@@ -1,4 +1,4 @@
-package com.tinchop.bowling.model;
+package com.tinchop.bowling.model.frame;
 
 import lombok.Setter;
 
@@ -7,24 +7,14 @@ import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 public abstract class Frame {
 
     @Setter
-    String firstChance;
+    protected String firstChance;
     @Setter
-    String secondChance;
+    protected String secondChance;
     @Setter
-    Frame nextFrame;
+    protected Frame nextFrame;
     @Setter
-    Frame previousFrame;
-    Integer score;
-
-
-    protected void calculateScore() {
-        score = 0;
-        if (previousFrame != null) {
-            score += previousFrame.getScore();
-        }
-    }
-
-    ;
+    protected Frame previousFrame;
+    protected Integer score;
 
     public Integer getScore() {
         if (score == null) {
@@ -33,17 +23,25 @@ public abstract class Frame {
         return score;
     }
 
+    protected void calculateScore() {
+        score = 0;
+        if (previousFrame != null) {
+            score += previousFrame.getScore();
+        }
+    }
+
     protected Integer giveStrikeBonusToPrevious() {
         return parseChance(firstChance) + parseChance(secondChance);
     }
 
-    Integer parseChance(String chance) {
+    protected Integer parseChance(String chance) {
         if (STRIKE.equals(chance)) {
-            return 10;
+            return MAX_CHANCE_SCORE;
         } else if (PAR.equals(chance)) {
-            return 10 - Integer.parseInt(firstChance);
+            return MAX_CHANCE_SCORE - Integer.parseInt(firstChance);
         } else if (FOUL.equals(chance)) {
-            return 0;
+            return FOUL_SCOURE;
         } else return Integer.parseInt(chance);
     }
+
 }

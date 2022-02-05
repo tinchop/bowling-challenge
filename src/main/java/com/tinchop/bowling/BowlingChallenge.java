@@ -1,10 +1,10 @@
 package com.tinchop.bowling;
 
-import com.tinchop.bowling.constant.BowlingChallengeMessages;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+
+import static com.tinchop.bowling.constant.BowlingChallengeMessages.NO_FILEPATH_PROVIDED;
 
 
 public class BowlingChallenge {
@@ -14,7 +14,7 @@ public class BowlingChallenge {
     public static void main(String[] args) {
 
         if (args.length == 0) {
-            System.out.println(BowlingChallengeMessages.NO_FILEPATH_PROVIDED);
+            System.out.println(NO_FILEPATH_PROVIDED);
             System.exit(EXIT_CODE_UNSUCCESSFUL);
         }
 
