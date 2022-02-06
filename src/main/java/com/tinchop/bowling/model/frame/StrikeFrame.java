@@ -22,7 +22,7 @@ public class StrikeFrame extends Frame {
     }
 
     @Override
-    public String getPrintableText() {
+    public String get() {
         var pinfallsLine = OUTPUT_TAB + firstChance + OUTPUT_TAB + OUTPUT_NEW_LINE;
         var scoreLine = getScore() + OUTPUT_TAB + OUTPUT_TAB;
         return pinfallsLine + scoreLine;

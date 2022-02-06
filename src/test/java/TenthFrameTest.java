@@ -12,7 +12,7 @@ public class TenthFrameTest {
         var frame = TenthFrame.builder().firstChance(OUTPUT_STRIKE).secondChance(OUTPUT_STRIKE).thirdChance("6").build();
         frame.setPreviousFrame(OpenFrame.builder().firstChance("3").secondChance("4").build());
 
-        var printableText = frame.getPrintableText();
+        var printableText = frame.get();
         assertAll(
                 () -> assertTrue(printableText.contains(OUTPUT_STRIKE)),
                 () -> assertFalse(printableText.contains("7")),

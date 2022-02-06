@@ -13,7 +13,7 @@ public class StrikeFrameTest {
         var frame = StrikeFrame.builder().firstChance(OUTPUT_STRIKE).build();
         frame.setNextFrame(OpenFrame.builder().firstChance("2").secondChance("4").build());
 
-        var printableText = frame.getPrintableText();
+        var printableText = frame.get();
         assertAll(
                 () -> assertTrue(printableText.contains(OUTPUT_STRIKE)),
                 () -> assertTrue(printableText.contains("16")));

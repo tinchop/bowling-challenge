@@ -1,7 +1,6 @@
 package com.tinchop.bowling.model;
 
-public interface Printable {
+import java.util.function.Supplier;
 
-    String getPrintableText();
-
+public interface Printable extends Supplier<String> {
 }

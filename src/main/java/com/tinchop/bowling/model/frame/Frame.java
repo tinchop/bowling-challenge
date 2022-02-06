@@ -46,7 +46,7 @@ public abstract class Frame implements Printable {
     }
 
     @Override
-    public String getPrintableText() {
+    public String get() {
         var pinfallsLine = firstChance + OUTPUT_TAB + secondChance + OUTPUT_TAB + OUTPUT_NEW_LINE;
         var scoreLine = getScore() + OUTPUT_TAB + OUTPUT_TAB;
         return pinfallsLine + scoreLine;

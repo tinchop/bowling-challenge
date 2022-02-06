@@ -10,7 +10,7 @@ public class OpenFrameTest {
     public void getPrintableTextTest() {
         var frame = OpenFrame.builder().firstChance("2").secondChance("4").build();
 
-        var printableText = frame.getPrintableText();
+        var printableText = frame.get();
         assertAll(
                 () -> assertTrue(printableText.contains("2")),
                 () -> assertTrue(printableText.contains("4")),

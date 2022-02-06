@@ -19,10 +19,10 @@ public class Player implements Printable {
     private List<Frame> frames;
 
     @Override
-    public String getPrintableText() {
+    public String get() {
         var nameLine = name + OUTPUT_NEW_LINE;
-        var pinfallsLine = OUTPUT_PINFALLS + frames.stream().map(frame -> frame.getPrintableText().split(OUTPUT_NEW_LINE)[0]).collect(Collectors.joining()) + OUTPUT_NEW_LINE;
-        var scoreLine = OUTPUT_SCORE + frames.stream().map(frame -> frame.getPrintableText().split(OUTPUT_NEW_LINE)[1]).collect(Collectors.joining()) + OUTPUT_NEW_LINE;
+        var pinfallsLine = OUTPUT_PINFALLS + frames.stream().map(frame -> frame.get().split(OUTPUT_NEW_LINE)[0]).collect(Collectors.joining()) + OUTPUT_NEW_LINE;
+        var scoreLine = OUTPUT_SCORE + frames.stream().map(frame -> frame.get().split(OUTPUT_NEW_LINE)[1]).collect(Collectors.joining()) + OUTPUT_NEW_LINE;
         return nameLine + pinfallsLine + scoreLine;
     }
 }

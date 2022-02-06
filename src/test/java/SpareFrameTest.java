@@ -13,7 +13,7 @@ public class SpareFrameTest {
         var frame = SpareFrame.builder().firstChance("2").secondChance(OUTPUT_SPARE).build();
         frame.setNextFrame(OpenFrame.builder().firstChance("2").secondChance("4").build());
 
-        var printableText = frame.getPrintableText();
+        var printableText = frame.get();
         assertAll(
                 () -> assertTrue(printableText.contains(OUTPUT_SPARE)),
                 () -> assertTrue(printableText.contains("12")));

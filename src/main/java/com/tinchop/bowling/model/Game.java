@@ -21,7 +21,7 @@ public class Game implements Printable {
     final private List<Player> players;
 
     @Override
-    public String getPrintableText() {
-        return OUTPUT_HEADER + players.stream().map(Player::getPrintableText).collect(Collectors.joining());
+    public String get() {
+        return OUTPUT_HEADER + players.stream().map(Player::get).collect(Collectors.joining());
     }
 }
