@@ -5,8 +5,7 @@ import java.util.Map;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 import static com.tinchop.bowling.constant.BowlingChallengeMessages.*;
-import static com.tinchop.bowling.shared.BowlingUtils.isSpare;
-import static com.tinchop.bowling.shared.BowlingUtils.isStrike;
+import static com.tinchop.bowling.shared.BowlingUtils.*;
 import static java.lang.Integer.parseInt;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
 
@@ -17,7 +16,7 @@ public class InputValidator {
 
     public InputValidator() {
         lineValidationRules = List.of(new TwoColumnLineRule(), new ScoreFormatRule());
-        bulkValidationRules = List.of(new NonEmptyFileRule(), new ValidChancesCountRule());
+        bulkValidationRules = List.of(new NonEmptyFileRule(), new ValidChancesCountRule(), new ValidPinfallsPerFrameRule());
     }
 
     public void validateLine(String line) {
@@ -155,6 +154,42 @@ public class InputValidator {
         @Override
         public String getMessage() {
             return VALID_CHANCES_COUNT_RULE_MSG;
+        }
+    }
+
+    private static class ValidPinfallsPerFrameRule implements BulkValidationRule {
+
+        @Override
+        public boolean brokenBy(Map<String, List<String>> bulk) {
+
+            for (String playerName : bulk.keySet()) {
+                if (brokenBy(bulk.get(playerName))) return true;
+            }
+            return false;
+        }
+
+        private boolean brokenBy(List<String> chances) {
+
+            int frameCount = 0;
+
+            for (int i = 0; i < chances.size(); i++) {
+                frameCount++;
+                if (frameCount == FRAMES_PER_GAME) {
+                    break;
+                }
+                if (!isStrike(chances.get(i))) {
+                    if (sumChances(chances.get(i), chances.get(i + 1)) > MAX_CHANCE_SCORE) return true;
+                    i++;
+                }
+            }
+
+            return false;
+        }
+
+
+        @Override
+        public String getMessage() {
+            return VALID_PINFALL_COUNT_RULE_MSG;
         }
     }
 }

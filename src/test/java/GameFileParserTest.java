@@ -61,6 +61,12 @@ public class GameFileParserTest {
     }
 
     @Test
+    @DisplayName("Shouldn't be more than 10 pins")
+    public void parseInvalidScore2FileTest() {
+        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/invalid-score-2.txt"));
+    }
+
+    @Test
     public void parseExtraScoreFileTest() {
         assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/extra-score.txt"));
     }

@@ -14,7 +14,7 @@ public class BowlingUtils {
     public static boolean isSpare(String first, String second) {
         boolean spareWithoutFoul = isNotEmpty(first) && isNumeric(first.trim())
                 && isNotEmpty(second) && isNumeric(second.trim())
-                && (parseInt(first.trim()) + parseInt(second.trim()) == 10);
+                && MAX_CHANCE_SCORE.equals(sumChances(first, second));
         boolean spareWithFoul = (isFoul(first) && isMaxScore(second));
         return spareWithoutFoul || spareWithFoul;
     }
@@ -25,6 +25,12 @@ public class BowlingUtils {
 
     public static boolean isMaxScore(String chance) {
         return isNotEmpty(chance) && isNumeric(chance) && MAX_CHANCE_SCORE.equals(parseInt(chance.trim()));
+    }
+
+    public static Integer sumChances(String first, String second) {
+        first = FOUL.equals(first.trim()) ? "0" : first.trim();
+        second = FOUL.equals(second.trim()) ? "0" : second.trim();
+        return parseInt(first) + parseInt(second);
     }
 
 }
