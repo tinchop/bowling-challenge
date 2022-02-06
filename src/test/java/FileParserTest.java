@@ -1,6 +1,7 @@
+import com.tinchop.bowling.parser.validation.TraditionalScoringLineValidator;
 import com.tinchop.bowling.parser.FileParser;
-import com.tinchop.bowling.parser.InvalidInputException;
-import com.tinchop.bowling.parser.InputValidator;
+import com.tinchop.bowling.parser.validation.InvalidInputException;
+import com.tinchop.bowling.parser.validation.TraditionalScoringBulkValidator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ public class FileParserTest {
 
     @BeforeAll
     public static void init() {
-        parser = FileParser.builder().inputValidator(new InputValidator()).build();
+        parser = FileParser.builder().lineValidator(new TraditionalScoringLineValidator()).bulkValidator(new TraditionalScoringBulkValidator()).build();
     }
 
     @Test

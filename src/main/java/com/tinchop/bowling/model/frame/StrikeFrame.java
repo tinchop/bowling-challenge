@@ -5,7 +5,7 @@ import lombok.NonNull;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 
-public class StrikeFrame extends Frame {
+public class StrikeFrame extends TraditionalScoringFrame {
 
     @Builder
     public StrikeFrame(@NonNull String firstChance) {
@@ -17,8 +17,8 @@ public class StrikeFrame extends Frame {
         score += (MAX_CHANCE_SCORE + nextFrame.sayStrikeBonusToPrevious());
     }
 
-    protected Integer sayStrikeBonusToPrevious() {
-        return MAX_CHANCE_SCORE + parseChance(nextFrame.firstChance);
+    public Integer sayStrikeBonusToPrevious() {
+        return MAX_CHANCE_SCORE + parseChance(nextFrame.getFirstChance());
     }
 
     @Override

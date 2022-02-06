@@ -1,4 +1,4 @@
-import com.tinchop.bowling.model.frame.FrameFactory;
+import com.tinchop.bowling.model.frame.TraditionalScoringFrameFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -8,13 +8,13 @@ import static com.tinchop.bowling.constant.BowlingChallengeConstants.INPUT_STRIK
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.MAX_FRAME_SCORE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FrameTest {
+public class TraditionalFrameTest {
 
-    private static FrameFactory frameFactory;
+    private static TraditionalScoringFrameFactory frameFactory;
 
     @BeforeAll
     public static void init() {
-        frameFactory = new FrameFactory();
+        frameFactory = new TraditionalScoringFrameFactory();
     }
 
     @Test

@@ -1,5 +1,7 @@
 package com.tinchop.bowling.parser;
 
+import com.tinchop.bowling.parser.validation.BulkValidator;
+import com.tinchop.bowling.parser.validation.LineValidator;
 import lombok.Builder;
 import lombok.NonNull;
 
@@ -13,7 +15,9 @@ import static com.tinchop.bowling.constant.BowlingChallengeConstants.COLUMN_DELI
 public class FileParser {
 
     @NonNull
-    private InputValidator inputValidator;
+    private LineValidator lineValidator;
+    @NonNull
+    private BulkValidator bulkValidator;
 
     public Map<String, List<String>> parse(String filePath) throws FileNotFoundException {
 
@@ -22,7 +26,7 @@ public class FileParser {
         var bulk = new LinkedHashMap<String, List<String>>();
         while (scanner.hasNext()) {
             var line = scanner.next();
-            inputValidator.validateLine(line);
+            lineValidator.validateLine(line);
             var splitLine = line.split(COLUMN_DELIMITER);
 
             bulk.compute(splitLine[0], (playerName, chances) -> {
@@ -30,12 +34,11 @@ public class FileParser {
                 chances.add(splitLine[1].trim());
                 return chances;
             });
-
         }
 
         scanner.close();
 
-        inputValidator.validateBulk(bulk);
+        bulkValidator.validateBulk(bulk);
 
         return bulk;
     }

@@ -7,7 +7,7 @@ import lombok.Setter;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.OUTPUT_NEW_LINE;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.OUTPUT_TAB;
 
-public class TenthFrame extends Frame {
+public class TenthFrame extends TraditionalScoringFrame {
 
     @Setter
     private String thirdChance;

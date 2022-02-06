@@ -2,10 +2,11 @@ package com.tinchop.bowling;
 
 import com.tinchop.bowling.model.Game;
 import com.tinchop.bowling.model.Printable;
-import com.tinchop.bowling.model.frame.FrameFactory;
+import com.tinchop.bowling.model.frame.TraditionalScoringFrameFactory;
 import com.tinchop.bowling.parser.FileParser;
-import com.tinchop.bowling.parser.InputValidator;
-import com.tinchop.bowling.parser.InvalidInputException;
+import com.tinchop.bowling.parser.validation.InvalidInputException;
+import com.tinchop.bowling.parser.validation.TraditionalScoringBulkValidator;
+import com.tinchop.bowling.parser.validation.TraditionalScoringLineValidator;
 
 import java.io.FileNotFoundException;
 import java.util.function.Consumer;
@@ -16,16 +17,20 @@ import static com.tinchop.bowling.constant.BowlingChallengeMessages.NO_FILEPATH_
 
 public class BowlingChallenge {
 
-    static Consumer<String> printer = System.out::println;
+    private static final Consumer<String> printer = System.out::println;
 
     public static void main(String[] args) {
 
         validateArgs(args);
+        var filePath = args[0];
 
-        var parser = FileParser.builder().inputValidator(new InputValidator()).build();
+        var parser = FileParser.builder()
+                .lineValidator(new TraditionalScoringLineValidator())
+                .bulkValidator(new TraditionalScoringBulkValidator())
+                .build();
 
         try {
-            Printable game = Game.builder().parsedFile(parser.parse(args[0])).frameFactory(new FrameFactory()).build();
+            Printable game = Game.builder().parsedFile(parser.parse(filePath)).frameFactory(new TraditionalScoringFrameFactory()).build();
             printer.accept(game.get());
         } catch (FileNotFoundException | InvalidInputException e) {
             printer.accept(e.getMessage());

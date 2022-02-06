@@ -1,4 +1,4 @@
-package com.tinchop.bowling.parser;
+package com.tinchop.bowling.parser.validation;
 
 public class InvalidInputException extends RuntimeException {
 
