@@ -8,7 +8,7 @@ import java.util.List;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 import static com.tinchop.bowling.shared.BowlingUtils.*;
 
-public final class TraditionalScoringFrameFactory implements FrameFactory {
+public class TraditionalScoringFrameFactory implements FrameFactory {
 
     public List<Frame> createFrames(List<String> chances) {
 

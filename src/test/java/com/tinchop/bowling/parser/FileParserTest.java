@@ -1,3 +1,5 @@
+package com.tinchop.bowling.parser;
+
 import com.tinchop.bowling.parser.validation.TraditionalScoringLineValidator;
 import com.tinchop.bowling.parser.FileParser;
 import com.tinchop.bowling.parser.validation.InvalidInputException;

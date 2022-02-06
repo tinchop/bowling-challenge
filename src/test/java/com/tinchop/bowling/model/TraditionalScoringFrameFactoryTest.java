@@ -1,3 +1,5 @@
+package com.tinchop.bowling.model;
+
 import com.tinchop.bowling.model.frame.TraditionalScoringFrameFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;

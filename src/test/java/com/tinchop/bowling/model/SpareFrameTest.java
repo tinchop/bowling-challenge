@@ -1,3 +1,5 @@
+package com.tinchop.bowling.model;
+
 import com.tinchop.bowling.model.frame.OpenFrame;
 import com.tinchop.bowling.model.frame.SpareFrame;
 import org.junit.jupiter.api.Test;
