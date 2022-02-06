@@ -16,7 +16,7 @@ import static com.tinchop.bowling.constant.BowlingChallengeMessages.NO_FILEPATH_
 
 public class BowlingChallenge {
 
-    static Consumer<Printable> printer = printable -> System.out.println(printable.get());
+    static Consumer<String> printer = System.out::println;
 
     public static void main(String[] args) {
 
@@ -26,12 +26,9 @@ public class BowlingChallenge {
 
         try {
             Printable game = Game.builder().parsedFile(parser.parse(args[0])).frameFactory(new FrameFactory()).build();
-            printer.accept(game);
-        } catch (InvalidInputException e) {
-            printer.accept(e);
-            System.exit(EXIT_CODE_UNSUCCESSFUL);
-        } catch (FileNotFoundException e) {
-            System.err.println(e.getMessage());
+            printer.accept(game.get());
+        } catch (FileNotFoundException | InvalidInputException e) {
+            printer.accept(e.getMessage());
             System.exit(EXIT_CODE_UNSUCCESSFUL);
         }
 
