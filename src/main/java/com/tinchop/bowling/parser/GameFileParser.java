@@ -26,9 +26,7 @@ public class GameFileParser {
             var splitLine = line.split(COLUMN_DELIMITER);
 
             bulk.compute(splitLine[0], (playerName, chances) -> {
-                if (chances == null) {
-                    chances = new ArrayList<>();
-                }
+                if (chances == null) chances = new ArrayList<>();
                 chances.add(splitLine[1].trim());
                 return chances;
             });

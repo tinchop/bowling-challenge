@@ -7,8 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
-import static com.tinchop.bowling.shared.BowlingUtils.isMaxChanceScore;
-import static com.tinchop.bowling.shared.BowlingUtils.isSpare;
+import static com.tinchop.bowling.shared.BowlingUtils.*;
 
 public final class FrameFactory {
 
@@ -24,7 +23,7 @@ public final class FrameFactory {
                         .secondChance(isSpare(chances.get(i), chances.get(i + 1)) ? OUTPUT_SPARE : translateChance(chances.get(i + 1)))
                         .thirdChance((chances.size() > i + 2) ? chances.get(i + 2) : StringUtils.EMPTY).build());
                 i = chances.size();
-            } else if (INPUT_STRIKE.equals(chances.get(i))) {
+            } else if (isStrike(chances.get(i))) {
                 frames.add(StrikeFrame.builder().firstChance(OUTPUT_STRIKE).build());
             } else if (isSpare(chances.get(i), chances.get(i + 1))) {
                 frames.add(SpareFrame.builder().firstChance(chances.get(i)).secondChance(OUTPUT_SPARE).build());

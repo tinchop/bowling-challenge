@@ -21,17 +21,13 @@ public class InputValidator {
 
     public void validateLine(String line) {
         lineValidationRules.forEach(rule -> {
-            if (rule.brokenBy(line)) {
-                throw new InvalidInputException(fullRuleMessage(rule.getMessage(), line));
-            }
+            if (rule.brokenBy(line)) throw new InvalidInputException(fullRuleMessage(rule.getMessage(), line));
         });
     }
 
     public void validateBulk(Map<String, List<String>> bulk) {
         bulkValidationRules.forEach(rule -> {
-            if (rule.brokenBy(bulk)) {
-                throw new InvalidInputException(rule.getMessage());
-            }
+            if (rule.brokenBy(bulk)) throw new InvalidInputException(rule.getMessage());
         });
     }
 
@@ -128,9 +124,7 @@ public class InputValidator {
                     tenthFrameStartIndex = i;
                     break;
                 }
-                if (!isStrike(chances.get(i))) {
-                    i++;
-                }
+                if (!isStrike(chances.get(i))) i++;
             }
 
             if (frameCount != 10) return true;
@@ -174,9 +168,8 @@ public class InputValidator {
 
             for (int i = 0; i < chances.size(); i++) {
                 frameCount++;
-                if (frameCount == FRAMES_PER_GAME) {
-                    break;
-                }
+                if (frameCount == FRAMES_PER_GAME) break;
+
                 if (!isStrike(chances.get(i))) {
                     if (sumChances(chances.get(i), chances.get(i + 1)) > MAX_CHANCE_SCORE) return true;
                     i++;

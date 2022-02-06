@@ -1,11 +1,11 @@
 package com.tinchop.bowling;
 
-import com.tinchop.bowling.parser.FrameFactory;
 import com.tinchop.bowling.model.Game;
 import com.tinchop.bowling.model.Player;
+import com.tinchop.bowling.parser.FrameFactory;
 import com.tinchop.bowling.parser.GameFileParser;
-import com.tinchop.bowling.parser.InvalidInputException;
 import com.tinchop.bowling.parser.InputValidator;
+import com.tinchop.bowling.parser.InvalidInputException;
 
 import java.io.FileNotFoundException;
 
@@ -22,9 +22,9 @@ public class BowlingChallenge {
         var parser = GameFileParser.builder().inputValidator(new InputValidator()).build();
 
         try {
-            var parsedGame = parser.parse(args[0]);
+            var parsedFile = parser.parse(args[0]);
             var frameFactory = new FrameFactory();
-            var players = parsedGame.keySet().stream().map(playerName -> Player.builder().name(playerName).frames(frameFactory.createFrames(parsedGame.get(playerName))).build()).toList();
+            var players = parsedFile.keySet().stream().map(playerName -> Player.builder().name(playerName).frames(frameFactory.createFrames(parsedFile.get(playerName))).build()).toList();
             var game = Game.builder().players(players).build();
 
             System.out.println(game.getPrintableText());
