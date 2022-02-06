@@ -52,7 +52,7 @@ public class FrameTest {
     }
 
     @Test
-    public void getScore1Test() {
+    public void getScoreTest() {
         var chances = List.of(
                 "3", "7",
                 "6", "3",
