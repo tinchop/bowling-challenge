@@ -1,22 +1,20 @@
-import com.tinchop.bowling.factory.ChancesValidator;
-import com.tinchop.bowling.factory.FrameFactory;
-import org.junit.jupiter.api.BeforeEach;
+import com.tinchop.bowling.parser.FrameFactory;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
+import static com.tinchop.bowling.constant.BowlingChallengeConstants.INPUT_STRIKE;
+import static com.tinchop.bowling.constant.BowlingChallengeConstants.MAX_FRAME_SCORE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FrameTest {
 
-    private FrameFactory frameFactory;
+    private static FrameFactory frameFactory;
 
-    @BeforeEach
-    public void init() {
-        if (frameFactory == null) {
-            frameFactory = FrameFactory.builder().chancesValidator(new ChancesValidator()).build();
-        }
+    @BeforeAll
+    public static void init() {
+        frameFactory = new FrameFactory();
     }
 
     @Test

@@ -1,21 +1,17 @@
-package com.tinchop.bowling.factory;
+package com.tinchop.bowling.parser;
 
 import com.tinchop.bowling.model.frame.*;
-import lombok.Builder;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
+import static java.lang.Integer.parseInt;
+import static org.apache.commons.lang3.StringUtils.isNumeric;
 
-@Builder
 public final class FrameFactory {
 
-    private ChancesValidator chancesValidator;
-
     public List<Frame> createFrames(List<String> chances) {
-        chancesValidator.validateChances(chances);
 
         var frames = new ArrayList<Frame>();
 
@@ -67,7 +63,7 @@ public final class FrameFactory {
     }
 
     private boolean isSpare(String firstChance, String secondChance) {
-        return StringUtils.isNumeric(firstChance) && StringUtils.isNumeric(secondChance) && (Integer.parseInt(firstChance) + Integer.parseInt(secondChance)) == 10;
+        return isNumeric(firstChance) && isNumeric(secondChance) && (parseInt(firstChance) + parseInt(secondChance)) == 10;
     }
 
     private boolean isPerfectScore(String chance) {

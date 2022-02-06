@@ -1,7 +1,6 @@
-import com.tinchop.bowling.factory.ChancesValidator;
-import com.tinchop.bowling.factory.FrameFactory;
+import com.tinchop.bowling.parser.FrameFactory;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -11,13 +10,11 @@ import static com.tinchop.bowling.constant.BowlingChallengeConstants.INPUT_STRIK
 
 public class FrameFactoryTest {
 
-    private FrameFactory frameFactory;
+    private static FrameFactory frameFactory;
 
-    @BeforeEach
-    public void init() {
-        if (frameFactory == null) {
-            frameFactory = FrameFactory.builder().chancesValidator(new ChancesValidator()).build();
-        }
+    @BeforeAll
+    public static void init() {
+        frameFactory = new FrameFactory();
     }
 
     @Test

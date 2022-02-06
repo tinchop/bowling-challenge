@@ -1,22 +1,20 @@
 import com.tinchop.bowling.parser.GameFileParser;
-import com.tinchop.bowling.parser.LineValidator;
-import org.junit.jupiter.api.BeforeEach;
+import com.tinchop.bowling.parser.InvalidInputException;
+import com.tinchop.bowling.parser.InputValidator;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameFileParserTest {
 
-    private GameFileParser parser;
+    private static GameFileParser parser;
 
-    @BeforeEach
-    public void init() {
-        if (parser == null) {
-            parser = GameFileParser.builder().lineValidator(new LineValidator()).build();
-        }
+    @BeforeAll
+    public static void init() {
+        parser = GameFileParser.builder().inputValidator(new InputValidator()).build();
     }
 
     @Test
@@ -49,6 +47,21 @@ public class GameFileParserTest {
         } catch (FileNotFoundException e) {
             fail(e);
         }
+    }
+
+    @Test
+    public void parseEmptyFileTest() {
+        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/empty.txt"));
+    }
+
+    @Test
+    public void parseInvalidScoreFileTest() {
+        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/invalid-score.txt"));
+    }
+
+    @Test
+    public void parseExtraScoreFileTest() {
+        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/extra-score.txt"));
     }
 
 }

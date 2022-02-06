@@ -5,6 +5,7 @@ import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
+import static java.lang.Integer.parseInt;
 
 public abstract class Frame implements Printable {
 
@@ -40,12 +41,12 @@ public abstract class Frame implements Printable {
         if (OUTPUT_STRIKE.equals(chance)) {
             return MAX_CHANCE_SCORE;
         } else if (OUTPUT_SPARE.equals(chance)) {
-            return MAX_CHANCE_SCORE - Integer.parseInt(firstChance);
+            return MAX_CHANCE_SCORE - parseInt(firstChance);
         } else if (FOUL.equals(chance)) {
             return FOUL_SCORE;
         } else if (StringUtils.isEmpty(chance)) {
             return 0;
-        } else return Integer.parseInt(chance);
+        } else return parseInt(chance);
     }
 
     @Override

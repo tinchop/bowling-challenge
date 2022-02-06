@@ -1,6 +1,5 @@
 package com.tinchop.bowling.parser;
 
-import com.tinchop.bowling.common.InvalidInputException;
 import lombok.Builder;
 import lombok.NonNull;
 
@@ -9,24 +8,24 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.COLUMN_DELIMITER;
-import static com.tinchop.bowling.constant.BowlingChallengeMessages.EMPTY_FILE_MSG;
 
 @Builder
 public class GameFileParser {
 
     @NonNull
-    private LineValidator lineValidator;
+    private InputValidator inputValidator;
 
     public Map<String, List<String>> parse(String filePath) throws FileNotFoundException {
 
         var scanner = createScanner(filePath);
 
-        var parsedGame = new LinkedHashMap<String, List<String>>();
+        var bulk = new LinkedHashMap<String, List<String>>();
         while (scanner.hasNext()) {
-            var line = lineValidator.validateLine(scanner.next());
+            var line = scanner.next();
+            inputValidator.validateLine(line);
             var splitLine = line.split(COLUMN_DELIMITER);
 
-            parsedGame.compute(splitLine[0], (playerName, chances) -> {
+            bulk.compute(splitLine[0], (playerName, chances) -> {
                 if (chances == null) {
                     chances = new ArrayList<>();
                 }
@@ -38,9 +37,9 @@ public class GameFileParser {
 
         scanner.close();
 
-        if (parsedGame.isEmpty()) throw new InvalidInputException(EMPTY_FILE_MSG);
+        inputValidator.validateBulk(bulk);
 
-        return parsedGame;
+        return bulk;
     }
 
     private Scanner createScanner(String filePath) throws FileNotFoundException {

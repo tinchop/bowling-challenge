@@ -1,7 +1,6 @@
-import com.tinchop.bowling.factory.ChancesValidator;
-import com.tinchop.bowling.factory.FrameFactory;
 import com.tinchop.bowling.model.Game;
 import com.tinchop.bowling.model.Player;
+import com.tinchop.bowling.parser.FrameFactory;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,7 @@ public class GameTest {
     @Test
     public void getPrintableTextTest() {
 
-        var frameFactory = FrameFactory.builder().chancesValidator(new ChancesValidator()).build();
+        var frameFactory = new FrameFactory();
         var lukesFrames = frameFactory.createFrames(List.of(
                 "2", "4",
                 "0", "5",
