@@ -22,17 +22,13 @@ public abstract class Frame implements Printable {
     protected Integer score;
 
     public Integer getScore() {
-        if (score == null) {
-            calculateScore();
-        }
+        if (score == null) calculateScore();
         return score;
     }
 
     protected void calculateScore() {
         score = 0;
-        if (previousFrame != null) {
-            score += previousFrame.getScore();
-        }
+        if (previousFrame != null) score += previousFrame.getScore();
     }
 
     protected Integer sayStrikeBonusToPrevious() {
@@ -44,10 +40,8 @@ public abstract class Frame implements Printable {
             return MAX_CHANCE_SCORE;
         } else if (OUTPUT_SPARE.equals(chance)) {
             return MAX_CHANCE_SCORE - parseInt(firstChance);
-        } else if (FOUL.equals(chance)) {
+        } else if (FOUL.equals(chance) || StringUtils.isEmpty(chance)) {
             return FOUL_SCORE;
-        } else if (StringUtils.isEmpty(chance)) {
-            return 0;
         } else return parseInt(chance);
     }
 

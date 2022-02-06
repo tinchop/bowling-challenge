@@ -10,7 +10,7 @@ import java.util.*;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.COLUMN_DELIMITER;
 
 @Builder
-public class GameFileParser {
+public class FileParser {
 
     @NonNull
     private InputValidator inputValidator;

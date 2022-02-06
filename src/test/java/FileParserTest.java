@@ -1,4 +1,4 @@
-import com.tinchop.bowling.parser.GameFileParser;
+import com.tinchop.bowling.parser.FileParser;
 import com.tinchop.bowling.parser.InvalidInputException;
 import com.tinchop.bowling.parser.InputValidator;
 import org.junit.jupiter.api.BeforeAll;
@@ -9,13 +9,13 @@ import java.io.FileNotFoundException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class GameFileParserTest {
+public class FileParserTest {
 
-    private static GameFileParser parser;
+    private static FileParser parser;
 
     @BeforeAll
     public static void init() {
-        parser = GameFileParser.builder().inputValidator(new InputValidator()).build();
+        parser = FileParser.builder().inputValidator(new InputValidator()).build();
     }
 
     @Test

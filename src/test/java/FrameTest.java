@@ -1,4 +1,4 @@
-import com.tinchop.bowling.parser.FrameFactory;
+import com.tinchop.bowling.model.frame.FrameFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 

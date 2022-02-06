@@ -1,4 +1,4 @@
-package com.tinchop.bowling.parser;
+package com.tinchop.bowling.model.frame;
 
 import com.tinchop.bowling.model.frame.*;
 import org.apache.commons.lang3.StringUtils;
@@ -33,7 +33,6 @@ public final class FrameFactory {
                 i++;
             }
             linkFrames(frames);
-
         }
 
         return frames;
