@@ -1,5 +1,7 @@
 package com.tinchop.bowling.model.frame;
 
+import lombok.Builder;
+import lombok.NonNull;
 import lombok.Setter;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.OUTPUT_NEW_LINE;
@@ -9,6 +11,12 @@ public class TenthFrame extends Frame {
 
     @Setter
     private String thirdChance;
+
+    @Builder
+    public TenthFrame(@NonNull String firstChance, @NonNull String secondChance, String thirdChance) {
+        super(firstChance, secondChance, null, null, null);
+        this.thirdChance = thirdChance;
+    }
 
     protected void calculateScore() {
         super.calculateScore();

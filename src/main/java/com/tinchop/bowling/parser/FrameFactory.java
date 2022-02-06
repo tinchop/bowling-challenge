@@ -1,13 +1,14 @@
 package com.tinchop.bowling.parser;
 
 import com.tinchop.bowling.model.frame.*;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
-import static java.lang.Integer.parseInt;
-import static org.apache.commons.lang3.StringUtils.isNumeric;
+import static com.tinchop.bowling.shared.BowlingUtils.isMaxChanceScore;
+import static com.tinchop.bowling.shared.BowlingUtils.isSpare;
 
 public final class FrameFactory {
 
@@ -17,65 +18,41 @@ public final class FrameFactory {
 
         for (int i = 0; i < chances.size() - 1; i++) {
 
-            if (frames.size() == 9) {
-                var frame = new TenthFrame();
-                frame.setFirstChance(translateChance(chances.get(i)));
-                if (isSpare(chances.get(i), chances.get(i + 1)) && !isPerfectScore(chances.get(i))) {
-                    frame.setSecondChance(OUTPUT_SPARE);
-                } else {
-                    frame.setSecondChance(translateChance(chances.get(i + 1)));
-                }
-                if (chances.size() > i + 2) {
-                    frame.setThirdChance(translateChance(chances.get(i + 2)));
-                } else {
-                    frame.setThirdChance("");
-                }
-                frames.add(frame);
+            if (frames.size() == (FRAMES_PER_GAME - 1)) {
+                frames.add(TenthFrame.builder()
+                        .firstChance(translateChance(chances.get(i)))
+                        .secondChance(isSpare(chances.get(i), chances.get(i + 1)) ? OUTPUT_SPARE : translateChance(chances.get(i + 1)))
+                        .thirdChance((chances.size() > i + 2) ? chances.get(i + 2) : StringUtils.EMPTY).build());
                 i = chances.size();
             } else if (INPUT_STRIKE.equals(chances.get(i))) {
-                var frame = new StrikeFrame();
-                frame.setFirstChance(OUTPUT_STRIKE);
-                frames.add(frame);
+                frames.add(StrikeFrame.builder().firstChance(OUTPUT_STRIKE).build());
             } else if (isSpare(chances.get(i), chances.get(i + 1))) {
-                var frame = new SpareFrame();
-                frame.setFirstChance(chances.get(i));
-                frame.setSecondChance(OUTPUT_SPARE);
-                frames.add(frame);
+                frames.add(SpareFrame.builder().firstChance(chances.get(i)).secondChance(OUTPUT_SPARE).build());
                 i++;
             } else {
-                var frame = new OpenFrame();
-                frame.setFirstChance(chances.get(i));
-                frame.setSecondChance(chances.get(i + 1));
-                frames.add(frame);
+                frames.add(OpenFrame.builder().firstChance(chances.get(i)).secondChance(chances.get(i + 1)).build());
                 i++;
             }
             linkFrames(frames);
 
         }
+
         return frames;
     }
 
     private String translateChance(String chance) {
-        if (isPerfectScore(chance)) {
+        if (isMaxChanceScore(chance)) {
             return OUTPUT_STRIKE;
         }
         return chance;
     }
 
-    private boolean isSpare(String firstChance, String secondChance) {
-        return isNumeric(firstChance) && isNumeric(secondChance) && (parseInt(firstChance) + parseInt(secondChance)) == 10;
-    }
-
-    private boolean isPerfectScore(String chance) {
-        return INPUT_STRIKE.equals(chance);
-    }
-
     private void linkFrames(List<Frame> frames) {
         if (frames.size() > 1) {
-            var lastFrame = frames.get(frames.size() - 2);
+            var previousFrame = frames.get(frames.size() - 2);
             var newlyCreatedFrame = frames.get(frames.size() - 1);
-            newlyCreatedFrame.setPreviousFrame(lastFrame);
-            lastFrame.setNextFrame(newlyCreatedFrame);
+            newlyCreatedFrame.setPreviousFrame(previousFrame);
+            previousFrame.setNextFrame(newlyCreatedFrame);
         }
     }
 

@@ -7,23 +7,23 @@ import static org.apache.commons.lang3.StringUtils.isNumeric;
 
 public class BowlingUtils {
 
-    public static boolean isStrike(String chanceInput) {
-        return isNotEmpty(chanceInput) && isNumeric(chanceInput.trim()) && INPUT_STRIKE.equals(chanceInput);
+    public static boolean isStrike(String chance) {
+        return isNotEmpty(chance) && isNumeric(chance.trim()) && INPUT_STRIKE.equals(chance);
     }
 
     public static boolean isSpare(String first, String second) {
         boolean spareWithoutFoul = isNotEmpty(first) && isNumeric(first.trim())
                 && isNotEmpty(second) && isNumeric(second.trim())
                 && MAX_CHANCE_SCORE.equals(sumChances(first, second));
-        boolean spareWithFoul = (isFoul(first) && isMaxScore(second));
-        return spareWithoutFoul || spareWithFoul;
+        boolean spareWithFoul = (isFoul(first) && isMaxChanceScore(second));
+        return !isStrike(first) && (spareWithoutFoul || spareWithFoul);
     }
 
     public static boolean isFoul(String chance) {
         return isNotEmpty(chance) && FOUL.equals(chance.trim());
     }
 
-    public static boolean isMaxScore(String chance) {
+    public static boolean isMaxChanceScore(String chance) {
         return isNotEmpty(chance) && isNumeric(chance) && MAX_CHANCE_SCORE.equals(parseInt(chance.trim()));
     }
 

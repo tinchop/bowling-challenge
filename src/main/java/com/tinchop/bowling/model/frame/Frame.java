@@ -1,12 +1,15 @@
 package com.tinchop.bowling.model.frame;
 
 import com.tinchop.bowling.model.Printable;
-import lombok.Setter;
+import lombok.*;
 import org.apache.commons.lang3.StringUtils;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 import static java.lang.Integer.parseInt;
 
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
 public abstract class Frame implements Printable {
 
     @Setter
