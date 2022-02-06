@@ -2,6 +2,7 @@ import com.tinchop.bowling.parser.GameFileParser;
 import com.tinchop.bowling.parser.InvalidInputException;
 import com.tinchop.bowling.parser.InputValidator;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
@@ -62,6 +63,36 @@ public class GameFileParserTest {
     @Test
     public void parseExtraScoreFileTest() {
         assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/extra-score.txt"));
+    }
+
+    @Test
+    @DisplayName("Tenth frame shouldn't have bonus chance (no strike nor spare)")
+    public void parseExtraScore2FileTest() {
+        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/extra-score-2.txt"));
+    }
+
+    @Test
+    @DisplayName("Tenth frame should have bonus chance (strike)")
+    public void parseIncompleteScoreFileTest() {
+        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/incomplete-score.txt"));
+    }
+
+    @Test
+    @DisplayName("Tenth frame should have bonus chance (spare)")
+    public void parseIncompleteScore2FileTest() {
+        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/incomplete-score-2.txt"));
+    }
+
+    @Test
+    @DisplayName("Not enough frames")
+    public void parseIncompleteScore3FileTest() {
+        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/incomplete-score-3.txt"));
+    }
+
+    @Test
+    @DisplayName("Tenth frame should have bonus chance (spare with foul)")
+    public void parseIncompleteScore4FileTest() {
+        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/incomplete-score-4.txt"));
     }
 
 }

@@ -10,6 +10,10 @@ public class BowlingChallengeConstants {
     public final static Integer MAX_FRAME_SCORE = 30;
     public final static Integer MAX_POSSIBLE_CHANCES = 21;
     public final static Integer MIN_POSSIBLE_CHANCES = 11;
+    public final static Integer MAX_CHANCES_TENTH_FRAME = 3;
+    public final static Integer MIN_CHANCES_TENTH_FRAME = 2;
+    public final static Integer FLOOR_SCORE_RANGE = 0;
+    public final static Integer CEILING_SCORE_RANGE = 10;
     public final static Integer FOUL_SCORE = 0;
     public final static String COLUMN_DELIMITER = "\t";
     public final static String OUTPUT_NEW_LINE = "\n";

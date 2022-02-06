@@ -5,6 +5,7 @@ import java.util.Map;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 import static com.tinchop.bowling.constant.BowlingChallengeMessages.*;
+import static com.tinchop.bowling.shared.BowlingUtils.isSpare;
 import static com.tinchop.bowling.shared.BowlingUtils.isStrike;
 import static java.lang.Integer.parseInt;
 import static org.apache.commons.lang3.StringUtils.isNumeric;
@@ -68,7 +69,7 @@ public class InputValidator {
         private boolean numberOutsideRange(String score) {
             if (!isNumeric(score.trim())) return false;
             int scoreInt = parseInt(score.trim());
-            return scoreInt < 0 || scoreInt > 10;
+            return scoreInt < FLOOR_SCORE_RANGE || scoreInt > CEILING_SCORE_RANGE;
         }
 
         @Override
@@ -110,22 +111,45 @@ public class InputValidator {
         public boolean brokenBy(Map<String, List<String>> bulk) {
 
             for (String playerName : bulk.keySet()) {
-                int frameCount = 0;
-                var chances = bulk.get(playerName);
-
-                if (chances.size() < MIN_POSSIBLE_CHANCES) return true;
-
-                for (int i = 0; i < chances.size(); i++) {
-                    if (frameCount == FRAMES_PER_GAME && Math.abs(i - chances.size()) > 2) {
-                        return true;
-                    }
-                    if (!isStrike(chances.get(i))) {
-                        i++;
-                    }
-                    frameCount++;
-                }
+                if (brokenBy(bulk.get(playerName))) return true;
             }
             return false;
+        }
+
+        private boolean brokenBy(List<String> chances) {
+
+            if (chancesCountOutsidePossibleRange(chances.size())) return true;
+
+            int frameCount = 0;
+            int tenthFrameStartIndex = -1;
+
+            for (int i = 0; i < chances.size(); i++) {
+                frameCount++;
+                if (frameCount == FRAMES_PER_GAME) {
+                    tenthFrameStartIndex = i;
+                    break;
+                }
+                if (!isStrike(chances.get(i))) {
+                    i++;
+                }
+            }
+
+            if (frameCount != 10) return true;
+
+            return invalidTenthFrame(chances.subList(tenthFrameStartIndex, chances.size()));
+        }
+
+        private boolean invalidTenthFrame(List<String> tenthFrameChances) {
+
+            boolean invalidTenthFrameChancesCount = tenthFrameChances.size() > MAX_CHANCES_TENTH_FRAME || tenthFrameChances.size() < MIN_CHANCES_TENTH_FRAME;
+            boolean bonusWithoutStrikeOrSpare = tenthFrameChances.size() != MIN_CHANCES_TENTH_FRAME && (!isStrike(tenthFrameChances.get(0)) && !isSpare(tenthFrameChances.get(0), tenthFrameChances.get(1)));
+            boolean noBonusWithStrikeOrSpare = tenthFrameChances.size() == MIN_CHANCES_TENTH_FRAME && (isStrike(tenthFrameChances.get(0)) || isSpare(tenthFrameChances.get(0), tenthFrameChances.get(1)));
+
+            return invalidTenthFrameChancesCount || bonusWithoutStrikeOrSpare || noBonusWithStrikeOrSpare;
+        }
+
+        private boolean chancesCountOutsidePossibleRange(Integer count) {
+            return count < MIN_POSSIBLE_CHANCES || count > MAX_POSSIBLE_CHANCES;
         }
 
         @Override
