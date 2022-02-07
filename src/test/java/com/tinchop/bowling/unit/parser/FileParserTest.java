@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 
+import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FileParserTest {
@@ -27,7 +28,7 @@ public class FileParserTest {
             var expectedPlayersCount = 2;
             var expectedJeffChancesCount = 17;
             var expectedJohnChancesCount = 18;
-            var parsedGame = parser.parse("src/test/resources/positive/scores.txt");
+            var parsedGame = parser.parse(SCORES_FILEPATH);
 
             assertAll(
                     () -> assertEquals(expectedPlayersCount, parsedGame.keySet().size()),
@@ -45,7 +46,7 @@ public class FileParserTest {
         try {
             var expectedPlayersCount = 1;
             var expectedCarlChancesCount = 12;
-            var parsedGame = parser.parse("src/test/resources/positive/perfect.txt");
+            var parsedGame = parser.parse(PERFECT_FILEPATH);
 
             assertAll(
                     () -> assertEquals(expectedPlayersCount, parsedGame.keySet().size()),
@@ -62,7 +63,7 @@ public class FileParserTest {
         try {
             var expectedPlayersCount = 1;
             var expectedCarlChancesCount = 20;
-            var parsedGame = parser.parse("src/test/resources/positive/zero.txt");
+            var parsedGame = parser.parse(ZERO_FILEPATH);
 
             assertAll(
                     () -> assertEquals(expectedPlayersCount, parsedGame.keySet().size()),
@@ -76,53 +77,47 @@ public class FileParserTest {
 
     @Test
     public void parseEmptyFileTest() {
-        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/empty.txt"));
+        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(EMPTY_FILEPATH));
     }
 
     @Test
     public void parseInvalidScoreFileTest() {
-        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/invalid-score.txt"));
+        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INVALID_SCORE_FILEPATH));
     }
 
     @Test
-    @DisplayName("Shouldn't be more than 10 pins")
     public void parseInvalidScore2FileTest() {
-        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/invalid-score-2.txt"));
+        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INVALID_SCORE_2_FILEPATH));
     }
 
     @Test
     public void parseExtraScoreFileTest() {
-        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/extra-score.txt"));
+        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(EXTRA_SCORE_FILEPATH));
     }
 
     @Test
-    @DisplayName("Tenth frame shouldn't have bonus chance (no strike nor spare)")
     public void parseExtraScore2FileTest() {
-        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/extra-score-2.txt"));
+        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(EXTRA_SCORE_2_FILEPATH));
     }
 
     @Test
-    @DisplayName("Tenth frame should have bonus chance (strike)")
     public void parseIncompleteScoreFileTest() {
-        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/incomplete-score.txt"));
+        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INCOMPLETE_SCORE_FILEPATH));
     }
 
     @Test
-    @DisplayName("Tenth frame should have bonus chance (spare)")
     public void parseIncompleteScore2FileTest() {
-        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/incomplete-score-2.txt"));
+        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INCOMPLETE_SCORE_2_FILEPATH));
     }
 
     @Test
-    @DisplayName("Not enough frames")
     public void parseIncompleteScore3FileTest() {
-        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/incomplete-score-3.txt"));
+        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INCOMPLETE_SCORE_3_FILEPATH));
     }
 
     @Test
-    @DisplayName("Tenth frame should have bonus chance (spare with foul)")
     public void parseIncompleteScore4FileTest() {
-        assertThrows(InvalidInputException.class, () -> parser.parse("src/test/resources/negative/incomplete-score-4.txt"));
+        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INCOMPLETE_SCORE_4_FILEPATH));
     }
 
 }

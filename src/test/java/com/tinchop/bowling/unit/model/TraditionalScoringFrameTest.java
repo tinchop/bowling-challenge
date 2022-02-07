@@ -10,7 +10,7 @@ import static com.tinchop.bowling.constant.BowlingChallengeConstants.INPUT_STRIK
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.MAX_FRAME_SCORE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TraditionalFrameTest {
+public class TraditionalScoringFrameTest {
 
     private static TraditionalScoringFrameFactory frameFactory;
 
