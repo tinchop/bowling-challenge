@@ -7,10 +7,10 @@ import java.util.List;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 
-public final class TsSpareFrame extends TraditionalScoringFrame {
+public final class SpareFrame extends TraditionalScoringFrame {
 
     @Builder
-    public TsSpareFrame(@NonNull String firstChance) {
+    public SpareFrame(@NonNull String firstChance) {
         super(List.of(firstChance, OUTPUT_SPARE));
     }
 

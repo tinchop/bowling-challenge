@@ -3,14 +3,14 @@ package com.tinchop.bowling.model.frame.traditional;
 import com.tinchop.bowling.model.frame.Frame;
 import lombok.NonNull;
 import lombok.Setter;
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 import static java.lang.Integer.parseInt;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-public abstract sealed class TraditionalScoringFrame implements Frame permits TsOpenFrame, TsStrikeFrame, TsSpareFrame, TsTenthFrame {
+public abstract sealed class TraditionalScoringFrame implements Frame permits OpenFrame, StrikeFrame, SpareFrame, TenthFrame {
 
     @NonNull
     protected List<String> chances;
@@ -50,7 +50,7 @@ public abstract sealed class TraditionalScoringFrame implements Frame permits Ts
             return MAX_CHANCE_SCORE;
         } else if (OUTPUT_SPARE.equals(chance)) {
             return MAX_CHANCE_SCORE - parseInt(getFirstChance());
-        } else if (FOUL.equals(chance) || StringUtils.isEmpty(chance)) {
+        } else if (FOUL.equals(chance) || isEmpty(chance)) {
             return FOUL_SCORE;
         } else return parseInt(chance);
     }

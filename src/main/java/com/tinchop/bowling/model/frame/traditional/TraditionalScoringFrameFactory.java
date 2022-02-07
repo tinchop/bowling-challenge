@@ -18,19 +18,19 @@ public class TraditionalScoringFrameFactory implements FrameFactory {
 
         for (int i = 0; i < chances.size() - 1; i++) {
 
-            if (frames.size() == (FRAMES_PER_GAME - 1)) {
-                frames.add(TsTenthFrame.builder()
-                        .firstChance(translateChance(chances.get(i)))
-                        .secondChance(isInputSpare(chances.get(i), chances.get(i + 1)) ? OUTPUT_SPARE : translateChance(chances.get(i + 1)))
-                        .thirdChance((chances.size() > i + 2) ? translateChance(chances.get(i + 2)) : StringUtils.EMPTY).build());
-                i = chances.size();
+            boolean shouldAddLastFrame = frames.size() == (FRAMES_PER_GAME - 1);
+            if (shouldAddLastFrame) {
+                frames.add(buildLastFrame(chances, i));
+                break;
             } else if (isInputStrike(chances.get(i))) {
-                frames.add(TsStrikeFrame.builder().build());
+                frames.add(StrikeFrame.builder().build());
             } else if (isInputSpare(chances.get(i), chances.get(i + 1))) {
-                frames.add(TsSpareFrame.builder().firstChance(chances.get(i)).build());
+                frames.add(SpareFrame.builder().firstChance(chances.get(i)).build());
                 i++;
             } else {
-                frames.add(TsOpenFrame.builder().firstChance(chances.get(i)).secondChance(chances.get(i + 1)).build());
+                frames.add(OpenFrame.builder()
+                        .firstChance(chances.get(i))
+                        .secondChance(chances.get(i + 1)).build());
                 i++;
             }
         }
@@ -39,15 +39,23 @@ public class TraditionalScoringFrameFactory implements FrameFactory {
         return frames;
     }
 
+    private TenthFrame buildLastFrame(List<String> chances, int tenthFrameStartIndex) {
+        boolean thirdChanceExists = (chances.size() > tenthFrameStartIndex + 2);
+        return TenthFrame.builder()
+                .firstChance(translateChance(chances.get(tenthFrameStartIndex)))
+                .secondChance(isInputSpare(chances.get(tenthFrameStartIndex), chances.get(tenthFrameStartIndex + 1)) ? OUTPUT_SPARE : translateChance(chances.get(tenthFrameStartIndex + 1)))
+                .thirdChance(thirdChanceExists ? translateChance(chances.get(tenthFrameStartIndex + 2)) : StringUtils.EMPTY).build();
+    }
+
+    private void linkFrames(List<Frame> frames) {
+        for (int i = 1; i < frames.size(); i++) frames.get(i).setPreviousFrame(frames.get(i - 1));
+    }
+
     private String translateChance(String chance) {
         if (isMaxChanceScore(chance)) {
             return OUTPUT_STRIKE;
         }
         return chance;
-    }
-
-    private void linkFrames(List<Frame> frames) {
-        for (int i = 1; i < frames.size(); i++) frames.get(i).setPreviousFrame(frames.get(i - 1));
     }
 
 }

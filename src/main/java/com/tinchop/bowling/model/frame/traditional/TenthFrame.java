@@ -8,10 +8,10 @@ import java.util.List;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.OUTPUT_NEW_LINE;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.OUTPUT_TAB;
 
-public final class TsTenthFrame extends TraditionalScoringFrame {
+public final class TenthFrame extends TraditionalScoringFrame {
 
     @Builder
-    public TsTenthFrame(@NonNull String firstChance, @NonNull String secondChance, String thirdChance) {
+    public TenthFrame(@NonNull String firstChance, @NonNull String secondChance, String thirdChance) {
         super(List.of(firstChance, secondChance, thirdChance));
     }
 

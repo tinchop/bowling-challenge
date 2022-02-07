@@ -6,10 +6,10 @@ import java.util.List;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 
-public final class TsStrikeFrame extends TraditionalScoringFrame {
+public final class StrikeFrame extends TraditionalScoringFrame {
 
     @Builder
-    public TsStrikeFrame() {
+    public StrikeFrame() {
         super(List.of(OUTPUT_STRIKE));
     }
 
