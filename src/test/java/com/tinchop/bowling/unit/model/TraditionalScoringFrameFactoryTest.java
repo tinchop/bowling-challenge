@@ -47,11 +47,10 @@ public class TraditionalScoringFrameFactoryTest {
                 INPUT_STRIKE, INPUT_STRIKE);
         var frames = frameFactory.createFrames(chances);
         Assertions.assertEquals(FRAMES_PER_GAME, frames.size());
-
     }
 
     @Test
-    public void createFramesAllParsTest() {
+    public void createFramesAllSparesTest() {
         var chances = List.of(
                 "0", "10",
                 "1", "9",
@@ -65,7 +64,23 @@ public class TraditionalScoringFrameFactoryTest {
                 "1", "9", "2");
         var frames = frameFactory.createFrames(chances);
         Assertions.assertEquals(FRAMES_PER_GAME, frames.size());
+    }
 
+    @Test
+    public void createFramesMixedTest() {
+        var chances = List.of(
+                "0", "10",
+                "1", "1",
+                "10",
+                "2", "8",
+                "9", "0",
+                "1", "1",
+                "5", "4",
+                "10",
+                "9", "F",
+                "10", "F", "2");
+        var frames = frameFactory.createFrames(chances);
+        Assertions.assertEquals(FRAMES_PER_GAME, frames.size());
     }
 
 

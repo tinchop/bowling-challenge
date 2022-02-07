@@ -25,20 +25,20 @@ public class TraditionalScoringBulkValidatorTest {
     @Test
     @SuppressWarnings("unchecked")
     public void nonEmptyFileRuleTest() {
-        Map<String, List<String>> empty = Collections.EMPTY_MAP;
-        testBulk(empty, NON_EMPTY_FILE_RULE_MSG);
+        Map<String, List<String>> bulk = Collections.EMPTY_MAP;
+        testBulk(bulk, NON_EMPTY_FILE_RULE_MSG);
     }
 
     @Test
     public void validChancesCountRuleTest() {
-        Map<String, List<String>> empty = Collections.singletonMap("Luke", List.of("10", "10"));
-        testBulk(empty, VALID_CHANCES_COUNT_RULE_MSG);
+        Map<String, List<String>> bulk = Collections.singletonMap("Luke", List.of("10", "10"));
+        testBulk(bulk, VALID_CHANCES_COUNT_RULE_MSG);
     }
 
     @Test
     public void validPinfallPerFrameRuleTest() {
-        Map<String, List<String>> empty = Collections.singletonMap("Luke", List.of("8", "8", "10", "10", "10", "10", "10", "10", "10", "10", "10", "10", "10"));
-        testBulk(empty, VALID_PINFALL_COUNT_RULE_MSG);
+        Map<String, List<String>> bulk = Collections.singletonMap("Luke", List.of("8", "8", "10", "10", "10", "10", "10", "10", "10", "10", "10", "10", "10"));
+        testBulk(bulk, VALID_PINFALL_COUNT_RULE_MSG);
     }
 
     public void testBulk(Map<String, List<String>> bulk, String expectedMessage) {

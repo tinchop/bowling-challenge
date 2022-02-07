@@ -5,12 +5,12 @@ import com.tinchop.bowling.parser.validation.InvalidInputException;
 import com.tinchop.bowling.parser.validation.TraditionalScoringBulkValidator;
 import com.tinchop.bowling.parser.validation.TraditionalScoringLineValidator;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
+import static com.tinchop.bowling.constant.BowlingChallengeMessages.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class FileParserTest {
@@ -77,47 +77,55 @@ public class FileParserTest {
 
     @Test
     public void parseEmptyFileTest() {
-        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(EMPTY_FILEPATH));
+        testFileParsing(EMPTY_FILEPATH, NON_EMPTY_FILE_RULE_MSG);
     }
 
     @Test
     public void parseInvalidScoreFileTest() {
-        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INVALID_SCORE_FILEPATH));
+        testFileParsing(INVALID_SCORE_FILEPATH, NUMERIC_OR_FOUL_SCORE_VALUE_RULE_MSG);
     }
 
     @Test
     public void parseInvalidScore2FileTest() {
-        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INVALID_SCORE_2_FILEPATH));
+        testFileParsing(INVALID_SCORE_2_FILEPATH, VALID_PINFALL_COUNT_RULE_MSG);
     }
 
     @Test
     public void parseExtraScoreFileTest() {
-        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(EXTRA_SCORE_FILEPATH));
+        testFileParsing(EXTRA_SCORE_FILEPATH, VALID_CHANCES_COUNT_RULE_MSG);
     }
 
     @Test
     public void parseExtraScore2FileTest() {
-        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(EXTRA_SCORE_2_FILEPATH));
+        testFileParsing(EXTRA_SCORE_2_FILEPATH, VALID_CHANCES_COUNT_RULE_MSG);
     }
 
     @Test
     public void parseIncompleteScoreFileTest() {
-        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INCOMPLETE_SCORE_FILEPATH));
+        testFileParsing(INCOMPLETE_SCORE_FILEPATH, VALID_CHANCES_COUNT_RULE_MSG);
     }
 
     @Test
     public void parseIncompleteScore2FileTest() {
-        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INCOMPLETE_SCORE_2_FILEPATH));
+        testFileParsing(INCOMPLETE_SCORE_2_FILEPATH, VALID_CHANCES_COUNT_RULE_MSG);
     }
 
     @Test
     public void parseIncompleteScore3FileTest() {
-        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INCOMPLETE_SCORE_3_FILEPATH));
+        testFileParsing(INCOMPLETE_SCORE_3_FILEPATH, VALID_CHANCES_COUNT_RULE_MSG);
     }
 
     @Test
     public void parseIncompleteScore4FileTest() {
-        var thrown = assertThrows(InvalidInputException.class, () -> parser.parse(INCOMPLETE_SCORE_4_FILEPATH));
+        testFileParsing(INCOMPLETE_SCORE_4_FILEPATH, VALID_CHANCES_COUNT_RULE_MSG);
+    }
+
+    public void testFileParsing(String filePath, String expectedMessage) {
+        var thrown = assertThrows(
+                InvalidInputException.class,
+                () -> parser.parse(filePath)
+        );
+        assertTrue(thrown.getMessage().contains(expectedMessage));
     }
 
 }
