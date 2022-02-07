@@ -12,7 +12,7 @@ public class StrikeFrameTest {
 
     @Test
     public void getPrintableTextTest() {
-        var frame = StrikeFrame.builder().firstChance(OUTPUT_STRIKE).build();
+        var frame = StrikeFrame.builder().build();
         frame.setNextFrame(OpenFrame.builder().firstChance("2").secondChance("4").build());
 
         var printableText = frame.get();

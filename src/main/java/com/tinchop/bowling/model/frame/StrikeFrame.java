@@ -1,15 +1,14 @@
 package com.tinchop.bowling.model.frame;
 
 import lombok.Builder;
-import lombok.NonNull;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 
 public class StrikeFrame extends TraditionalScoringFrame {
 
     @Builder
-    public StrikeFrame(@NonNull String firstChance) {
-        super(firstChance, null, null, null, null);
+    public StrikeFrame() {
+        super(OUTPUT_STRIKE, null, null, null, null);
     }
 
     protected void calculateScore() {

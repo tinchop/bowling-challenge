@@ -66,7 +66,7 @@ public class TraditionalScoringBulkValidator implements BulkValidator {
                     tenthFrameStartIndex = i;
                     break;
                 }
-                if (!isStrike(chances.get(i))) i++;
+                if (!isInputStrike(chances.get(i))) i++;
             }
 
             if (frameCount != 10) return true;
@@ -77,8 +77,8 @@ public class TraditionalScoringBulkValidator implements BulkValidator {
         private boolean invalidTenthFrame(List<String> tenthFrameChances) {
 
             boolean invalidTenthFrameChancesCount = tenthFrameChances.size() > MAX_CHANCES_TENTH_FRAME || tenthFrameChances.size() < MIN_CHANCES_TENTH_FRAME;
-            boolean bonusWithoutStrikeOrSpare = tenthFrameChances.size() != MIN_CHANCES_TENTH_FRAME && (!isStrike(tenthFrameChances.get(0)) && !isSpare(tenthFrameChances.get(0), tenthFrameChances.get(1)));
-            boolean noBonusWithStrikeOrSpare = tenthFrameChances.size() == MIN_CHANCES_TENTH_FRAME && (isStrike(tenthFrameChances.get(0)) || isSpare(tenthFrameChances.get(0), tenthFrameChances.get(1)));
+            boolean bonusWithoutStrikeOrSpare = tenthFrameChances.size() != MIN_CHANCES_TENTH_FRAME && (!isInputStrike(tenthFrameChances.get(0)) && !isInputSpare(tenthFrameChances.get(0), tenthFrameChances.get(1)));
+            boolean noBonusWithStrikeOrSpare = tenthFrameChances.size() == MIN_CHANCES_TENTH_FRAME && (isInputStrike(tenthFrameChances.get(0)) || isInputSpare(tenthFrameChances.get(0), tenthFrameChances.get(1)));
 
             return invalidTenthFrameChancesCount || bonusWithoutStrikeOrSpare || noBonusWithStrikeOrSpare;
         }
@@ -112,7 +112,7 @@ public class TraditionalScoringBulkValidator implements BulkValidator {
                 frameCount++;
                 if (frameCount == FRAMES_PER_GAME) break;
 
-                if (!isStrike(chances.get(i))) {
+                if (!isInputStrike(chances.get(i))) {
                     if (sumChances(chances.get(i), chances.get(i + 1)) > MAX_CHANCE_SCORE) return true;
                     i++;
                 }

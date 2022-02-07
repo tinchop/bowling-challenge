@@ -19,20 +19,20 @@ public class TraditionalScoringFrameFactory implements FrameFactory {
             if (frames.size() == (FRAMES_PER_GAME - 1)) {
                 frames.add(TenthFrame.builder()
                         .firstChance(translateChance(chances.get(i)))
-                        .secondChance(isSpare(chances.get(i), chances.get(i + 1)) ? OUTPUT_SPARE : translateChance(chances.get(i + 1)))
+                        .secondChance(isInputSpare(chances.get(i), chances.get(i + 1)) ? OUTPUT_SPARE : translateChance(chances.get(i + 1)))
                         .thirdChance((chances.size() > i + 2) ? chances.get(i + 2) : StringUtils.EMPTY).build());
                 i = chances.size();
-            } else if (isStrike(chances.get(i))) {
-                frames.add(StrikeFrame.builder().firstChance(OUTPUT_STRIKE).build());
-            } else if (isSpare(chances.get(i), chances.get(i + 1))) {
-                frames.add(SpareFrame.builder().firstChance(chances.get(i)).secondChance(OUTPUT_SPARE).build());
+            } else if (isInputStrike(chances.get(i))) {
+                frames.add(StrikeFrame.builder().build());
+            } else if (isInputSpare(chances.get(i), chances.get(i + 1))) {
+                frames.add(SpareFrame.builder().firstChance(chances.get(i)).build());
                 i++;
             } else {
                 frames.add(OpenFrame.builder().firstChance(chances.get(i)).secondChance(chances.get(i + 1)).build());
                 i++;
             }
-            linkFrames(frames);
         }
+        linkFrames(frames);
 
         return frames;
     }
@@ -45,12 +45,7 @@ public class TraditionalScoringFrameFactory implements FrameFactory {
     }
 
     private void linkFrames(List<Frame> frames) {
-        if (frames.size() > 1) {
-            var previousFrame = frames.get(frames.size() - 2);
-            var newlyCreatedFrame = frames.get(frames.size() - 1);
-            newlyCreatedFrame.setPreviousFrame(previousFrame);
-            previousFrame.setNextFrame(newlyCreatedFrame);
-        }
+        for (int i = 1; i < frames.size(); i++) frames.get(i).setPreviousFrame(frames.get(i - 1));
     }
 
 }

@@ -16,8 +16,8 @@ public abstract class TraditionalScoringFrame implements Frame {
     protected String firstChance;
     @Setter
     protected String secondChance;
-    protected Frame nextFrame;
     @Setter
+    protected Frame nextFrame;
     protected Frame previousFrame;
     protected Integer score;
 
@@ -28,8 +28,9 @@ public abstract class TraditionalScoringFrame implements Frame {
     }
 
     @Override
-    public void setNextFrame(Frame frame) {
-        this.nextFrame = frame;
+    public void setPreviousFrame(Frame frame) {
+        this.previousFrame = frame;
+        this.previousFrame.setNextFrame(this);
     }
 
     protected void calculateScore() {

@@ -12,7 +12,7 @@ public class SpareFrameTest {
 
     @Test
     public void getPrintableTextTest() {
-        var frame = SpareFrame.builder().firstChance("2").secondChance(OUTPUT_SPARE).build();
+        var frame = SpareFrame.builder().firstChance("2").build();
         frame.setNextFrame(OpenFrame.builder().firstChance("2").secondChance("4").build());
 
         var printableText = frame.get();
