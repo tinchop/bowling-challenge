@@ -1,5 +1,7 @@
-package com.tinchop.bowling.model.frame;
+package com.tinchop.bowling.model.frame.traditional;
 
+import com.tinchop.bowling.model.frame.Frame;
+import com.tinchop.bowling.model.frame.FrameFactory;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -17,18 +19,18 @@ public class TraditionalScoringFrameFactory implements FrameFactory {
         for (int i = 0; i < chances.size() - 1; i++) {
 
             if (frames.size() == (FRAMES_PER_GAME - 1)) {
-                frames.add(TenthFrame.builder()
+                frames.add(TsTenthFrame.builder()
                         .firstChance(translateChance(chances.get(i)))
                         .secondChance(isInputSpare(chances.get(i), chances.get(i + 1)) ? OUTPUT_SPARE : translateChance(chances.get(i + 1)))
                         .thirdChance((chances.size() > i + 2) ? translateChance(chances.get(i + 2)) : StringUtils.EMPTY).build());
                 i = chances.size();
             } else if (isInputStrike(chances.get(i))) {
-                frames.add(StrikeFrame.builder().build());
+                frames.add(TsStrikeFrame.builder().build());
             } else if (isInputSpare(chances.get(i), chances.get(i + 1))) {
-                frames.add(SpareFrame.builder().firstChance(chances.get(i)).build());
+                frames.add(TsSpareFrame.builder().firstChance(chances.get(i)).build());
                 i++;
             } else {
-                frames.add(OpenFrame.builder().firstChance(chances.get(i)).secondChance(chances.get(i + 1)).build());
+                frames.add(TsOpenFrame.builder().firstChance(chances.get(i)).secondChance(chances.get(i + 1)).build());
                 i++;
             }
         }

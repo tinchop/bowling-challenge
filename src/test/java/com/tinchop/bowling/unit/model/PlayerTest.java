@@ -2,7 +2,7 @@ package com.tinchop.bowling.unit.model;
 
 import com.tinchop.bowling.model.Player;
 import com.tinchop.bowling.model.frame.Frame;
-import com.tinchop.bowling.model.frame.OpenFrame;
+import com.tinchop.bowling.model.frame.traditional.TsOpenFrame;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -19,7 +19,7 @@ public class PlayerTest {
 
         var firstChance = "2";
         var secondChance = "4";
-        List<Frame> frames = List.of(OpenFrame.builder().firstChance(firstChance).secondChance(secondChance).build());
+        List<Frame> frames = List.of(TsOpenFrame.builder().firstChance(firstChance).secondChance(secondChance).build());
         var playerName = "Luke";
         var player = Player.builder().name(playerName).frames(frames).build();
 

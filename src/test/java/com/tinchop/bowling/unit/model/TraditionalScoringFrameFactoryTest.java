@@ -1,6 +1,6 @@
 package com.tinchop.bowling.unit.model;
 
-import com.tinchop.bowling.model.frame.TraditionalScoringFrameFactory;
+import com.tinchop.bowling.model.frame.traditional.TraditionalScoringFrameFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

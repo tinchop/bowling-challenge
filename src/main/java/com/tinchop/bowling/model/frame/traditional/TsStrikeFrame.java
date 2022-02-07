@@ -1,4 +1,4 @@
-package com.tinchop.bowling.model.frame;
+package com.tinchop.bowling.model.frame.traditional;
 
 import lombok.Builder;
 
@@ -6,10 +6,10 @@ import java.util.List;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 
-public class StrikeFrame extends TraditionalScoringFrame {
+public final class TsStrikeFrame extends TraditionalScoringFrame {
 
     @Builder
-    public StrikeFrame() {
+    public TsStrikeFrame() {
         super(List.of(OUTPUT_STRIKE));
     }
 

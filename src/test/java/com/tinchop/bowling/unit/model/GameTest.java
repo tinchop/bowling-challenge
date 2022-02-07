@@ -2,8 +2,8 @@ package com.tinchop.bowling.unit.model;
 
 import com.tinchop.bowling.model.Game;
 import com.tinchop.bowling.model.frame.Frame;
-import com.tinchop.bowling.model.frame.OpenFrame;
-import com.tinchop.bowling.model.frame.TraditionalScoringFrameFactory;
+import com.tinchop.bowling.model.frame.traditional.TsOpenFrame;
+import com.tinchop.bowling.model.frame.traditional.TraditionalScoringFrameFactory;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -25,7 +25,7 @@ public class GameTest {
         var firstChance = "2";
         var secondChance = "4";
         var playerName = "Luke";
-        List<Frame> frames = List.of(OpenFrame.builder().firstChance(firstChance).secondChance(secondChance).build());
+        List<Frame> frames = List.of(TsOpenFrame.builder().firstChance(firstChance).secondChance(secondChance).build());
         when(frameFactory.createFrames(any())).thenReturn(frames);
         var parsedFile = Collections.singletonMap(playerName, List.of(firstChance, secondChance));
         var game = Game.builder().frameFactory(frameFactory).parsedFile(parsedFile).build();

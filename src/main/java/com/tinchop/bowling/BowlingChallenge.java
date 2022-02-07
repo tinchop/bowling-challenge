@@ -2,7 +2,7 @@ package com.tinchop.bowling;
 
 import com.tinchop.bowling.model.Game;
 import com.tinchop.bowling.model.Printable;
-import com.tinchop.bowling.model.frame.TraditionalScoringFrameFactory;
+import com.tinchop.bowling.model.frame.traditional.TraditionalScoringFrameFactory;
 import com.tinchop.bowling.parser.FileParser;
 import com.tinchop.bowling.parser.validation.InvalidInputException;
 import com.tinchop.bowling.parser.validation.TraditionalScoringBulkValidator;

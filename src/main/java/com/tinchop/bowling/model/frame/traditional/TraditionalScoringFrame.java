@@ -1,5 +1,6 @@
-package com.tinchop.bowling.model.frame;
+package com.tinchop.bowling.model.frame.traditional;
 
+import com.tinchop.bowling.model.frame.Frame;
 import lombok.NonNull;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
@@ -9,7 +10,7 @@ import java.util.List;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 import static java.lang.Integer.parseInt;
 
-public abstract class TraditionalScoringFrame implements Frame {
+public abstract sealed class TraditionalScoringFrame implements Frame permits TsOpenFrame, TsStrikeFrame, TsSpareFrame, TsTenthFrame {
 
     @NonNull
     protected List<String> chances;

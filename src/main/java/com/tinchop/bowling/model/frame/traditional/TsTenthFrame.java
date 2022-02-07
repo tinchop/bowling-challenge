@@ -1,4 +1,4 @@
-package com.tinchop.bowling.model.frame;
+package com.tinchop.bowling.model.frame.traditional;
 
 import lombok.Builder;
 import lombok.NonNull;
@@ -8,10 +8,10 @@ import java.util.List;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.OUTPUT_NEW_LINE;
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.OUTPUT_TAB;
 
-public class TenthFrame extends TraditionalScoringFrame {
+public final class TsTenthFrame extends TraditionalScoringFrame {
 
     @Builder
-    public TenthFrame(@NonNull String firstChance, @NonNull String secondChance, String thirdChance) {
+    public TsTenthFrame(@NonNull String firstChance, @NonNull String secondChance, String thirdChance) {
         super(List.of(firstChance, secondChance, thirdChance));
     }
 
