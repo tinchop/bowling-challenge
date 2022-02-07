@@ -20,7 +20,7 @@ public class TraditionalScoringFrameFactory implements FrameFactory {
                 frames.add(TenthFrame.builder()
                         .firstChance(translateChance(chances.get(i)))
                         .secondChance(isInputSpare(chances.get(i), chances.get(i + 1)) ? OUTPUT_SPARE : translateChance(chances.get(i + 1)))
-                        .thirdChance((chances.size() > i + 2) ? chances.get(i + 2) : StringUtils.EMPTY).build());
+                        .thirdChance((chances.size() > i + 2) ? translateChance(chances.get(i + 2)) : StringUtils.EMPTY).build());
                 i = chances.size();
             } else if (isInputStrike(chances.get(i))) {
                 frames.add(StrikeFrame.builder().build());
