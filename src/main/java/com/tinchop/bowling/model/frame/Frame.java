@@ -12,8 +12,6 @@ public interface Frame extends Printable {
 
     void setNextFrame(Frame frame);
 
-    Integer parseChance(String chance);
-
     Integer sayStrikeBonusToPrevious();
 
 }

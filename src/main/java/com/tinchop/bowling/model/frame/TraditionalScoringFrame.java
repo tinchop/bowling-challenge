@@ -44,7 +44,7 @@ public abstract class TraditionalScoringFrame implements Frame {
         if (previousFrame != null) score += previousFrame.getScore();
     }
 
-    public Integer parseChance(String chance) {
+    protected Integer parseChance(String chance) {
         if (OUTPUT_STRIKE.equals(chance)) {
             return MAX_CHANCE_SCORE;
         } else if (OUTPUT_SPARE.equals(chance)) {
