@@ -25,4 +25,21 @@ public class BowlingChallengeConstants {
     public final static String OUTPUT_SPARE = "/";
     public static final int EXIT_CODE_UNSUCCESSFUL = 1;
 
+    public static final String POSITIVE_FOLDER = "src/test/resources/positive/";
+    public static final String SCORES_FILEPATH = POSITIVE_FOLDER + "scores.txt";
+    public static final String PERFECT_FILEPATH = POSITIVE_FOLDER + "perfect.txt";
+    public static final String ZERO_FILEPATH = POSITIVE_FOLDER + "zero.txt";
+    public static final String NEGATIVE_FOLDER = "src/test/resources/negative/";
+    public static final String EMPTY_FILEPATH = NEGATIVE_FOLDER + "empty.txt";
+    public static final String FREE_TEXT_FILEPATH = NEGATIVE_FOLDER + "free-text.txt";
+    public static final String EXTRA_SCORE_FILEPATH = NEGATIVE_FOLDER + "extra-score.txt";
+    public static final String EXTRA_SCORE_2_FILEPATH = NEGATIVE_FOLDER + "extra-score-2.txt";
+    public static final String INCOMPLETE_SCORE_FILEPATH = NEGATIVE_FOLDER + "incomplete-score.txt";
+    public static final String INCOMPLETE_SCORE_2_FILEPATH = NEGATIVE_FOLDER + "incomplete-score-2.txt";
+    public static final String INCOMPLETE_SCORE_3_FILEPATH = NEGATIVE_FOLDER + "incomplete-score-3.txt";
+    public static final String INCOMPLETE_SCORE_4_FILEPATH = NEGATIVE_FOLDER + "incomplete-score-4.txt";
+    public static final String INVALID_SCORE_FILEPATH = NEGATIVE_FOLDER + "invalid-score.txt";
+    public static final String INVALID_SCORE_2_FILEPATH = NEGATIVE_FOLDER + "invalid-score-2.txt";
+    public static final String NEGATIVE_FILEPATH = NEGATIVE_FOLDER + "negative.txt";
+
 }

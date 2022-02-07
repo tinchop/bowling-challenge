@@ -1,4 +1,4 @@
-package com.tinchop.bowling.model;
+package com.tinchop.bowling.unit.model;
 
 import com.tinchop.bowling.model.frame.TraditionalScoringFrameFactory;
 import org.junit.jupiter.api.BeforeAll;

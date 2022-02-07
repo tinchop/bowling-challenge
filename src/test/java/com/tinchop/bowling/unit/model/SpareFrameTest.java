@@ -1,4 +1,4 @@
-package com.tinchop.bowling.model;
+package com.tinchop.bowling.unit.model;
 
 import com.tinchop.bowling.model.frame.OpenFrame;
 import com.tinchop.bowling.model.frame.SpareFrame;
@@ -18,7 +18,8 @@ public class SpareFrameTest {
         var printableText = frame.get();
         assertAll(
                 () -> assertTrue(printableText.contains(OUTPUT_SPARE)),
-                () -> assertTrue(printableText.contains("12")));
+                () -> assertTrue(printableText.contains("12"))
+        );
     }
 
 }

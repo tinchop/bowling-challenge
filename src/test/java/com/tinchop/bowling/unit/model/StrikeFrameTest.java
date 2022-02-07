@@ -1,4 +1,4 @@
-package com.tinchop.bowling.model;
+package com.tinchop.bowling.unit.model;
 
 import com.tinchop.bowling.model.frame.OpenFrame;
 import com.tinchop.bowling.model.frame.StrikeFrame;
@@ -18,7 +18,8 @@ public class StrikeFrameTest {
         var printableText = frame.get();
         assertAll(
                 () -> assertTrue(printableText.contains(OUTPUT_STRIKE)),
-                () -> assertTrue(printableText.contains("16")));
+                () -> assertTrue(printableText.contains("16"))
+        );
     }
 
 }

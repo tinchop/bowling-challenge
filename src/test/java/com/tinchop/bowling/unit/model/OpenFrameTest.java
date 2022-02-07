@@ -1,4 +1,4 @@
-package com.tinchop.bowling.model;
+package com.tinchop.bowling.unit.model;
 
 import com.tinchop.bowling.model.frame.OpenFrame;
 import org.junit.jupiter.api.Test;
@@ -16,7 +16,8 @@ public class OpenFrameTest {
         assertAll(
                 () -> assertTrue(printableText.contains("2")),
                 () -> assertTrue(printableText.contains("4")),
-                () -> assertTrue(printableText.contains("6")));
+                () -> assertTrue(printableText.contains("6"))
+        );
     }
 
 }

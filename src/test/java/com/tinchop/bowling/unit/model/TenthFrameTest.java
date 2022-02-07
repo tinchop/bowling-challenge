@@ -1,4 +1,4 @@
-package com.tinchop.bowling.model;
+package com.tinchop.bowling.unit.model;
 
 import com.tinchop.bowling.model.frame.OpenFrame;
 import com.tinchop.bowling.model.frame.TenthFrame;
@@ -20,7 +20,8 @@ public class TenthFrameTest {
                 () -> assertFalse(printableText.contains("7")),
                 () -> assertFalse(printableText.contains("4")),
                 () -> assertTrue(printableText.contains("6")),
-                () -> assertTrue(printableText.contains("33")));
+                () -> assertTrue(printableText.contains("33"))
+        );
     }
 
 }

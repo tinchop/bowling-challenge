@@ -1,5 +1,6 @@
-package com.tinchop.bowling.model;
+package com.tinchop.bowling.unit.model;
 
+import com.tinchop.bowling.model.Player;
 import com.tinchop.bowling.model.frame.Frame;
 import com.tinchop.bowling.model.frame.OpenFrame;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,8 @@ public class PlayerTest {
                 () -> assertTrue(printableText.contains(firstChance)),
                 () -> assertTrue(printableText.contains(secondChance)),
                 () -> assertTrue(printableText.contains(OUTPUT_PINFALLS)),
-                () -> assertTrue(printableText.contains(OUTPUT_SCORE)));
+                () -> assertTrue(printableText.contains(OUTPUT_SCORE))
+        );
 
     }
 

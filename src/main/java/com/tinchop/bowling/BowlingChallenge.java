@@ -34,7 +34,6 @@ public class BowlingChallenge {
             printer.accept(game.get());
         } catch (FileNotFoundException | InvalidInputException e) {
             printer.accept(e.getMessage());
-            System.exit(EXIT_CODE_UNSUCCESSFUL);
         }
 
     }

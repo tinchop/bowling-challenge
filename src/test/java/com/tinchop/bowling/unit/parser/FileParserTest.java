@@ -1,9 +1,9 @@
-package com.tinchop.bowling.parser;
+package com.tinchop.bowling.unit.parser;
 
-import com.tinchop.bowling.parser.validation.TraditionalScoringLineValidator;
 import com.tinchop.bowling.parser.FileParser;
 import com.tinchop.bowling.parser.validation.InvalidInputException;
 import com.tinchop.bowling.parser.validation.TraditionalScoringBulkValidator;
+import com.tinchop.bowling.parser.validation.TraditionalScoringLineValidator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,9 +29,11 @@ public class FileParserTest {
             var expectedJohnChancesCount = 18;
             var parsedGame = parser.parse("src/test/resources/positive/scores.txt");
 
-            assertEquals(expectedPlayersCount, parsedGame.keySet().size());
-            assertEquals(expectedJeffChancesCount, parsedGame.get("Jeff").size());
-            assertEquals(expectedJohnChancesCount, parsedGame.get("John").size());
+            assertAll(
+                    () -> assertEquals(expectedPlayersCount, parsedGame.keySet().size()),
+                    () -> assertEquals(expectedJeffChancesCount, parsedGame.get("Jeff").size()),
+                    () -> assertEquals(expectedJohnChancesCount, parsedGame.get("John").size())
+            );
 
         } catch (FileNotFoundException e) {
             fail(e);
@@ -45,8 +47,27 @@ public class FileParserTest {
             var expectedCarlChancesCount = 12;
             var parsedGame = parser.parse("src/test/resources/positive/perfect.txt");
 
-            assertEquals(expectedPlayersCount, parsedGame.keySet().size());
-            assertEquals(expectedCarlChancesCount, parsedGame.get("Carl").size());
+            assertAll(
+                    () -> assertEquals(expectedPlayersCount, parsedGame.keySet().size()),
+                    () -> assertEquals(expectedCarlChancesCount, parsedGame.get("Carl").size())
+            );
+
+        } catch (FileNotFoundException e) {
+            fail(e);
+        }
+    }
+
+    @Test
+    public void parseZeroFileTest() {
+        try {
+            var expectedPlayersCount = 1;
+            var expectedCarlChancesCount = 20;
+            var parsedGame = parser.parse("src/test/resources/positive/zero.txt");
+
+            assertAll(
+                    () -> assertEquals(expectedPlayersCount, parsedGame.keySet().size()),
+                    () -> assertEquals(expectedCarlChancesCount, parsedGame.get("Carl").size())
+            );
 
         } catch (FileNotFoundException e) {
             fail(e);
