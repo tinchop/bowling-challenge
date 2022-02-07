@@ -1,25 +1,31 @@
 package com.tinchop.bowling.model.frame;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.*;
 import static java.lang.Integer.parseInt;
 
-@AllArgsConstructor
 public abstract class TraditionalScoringFrame implements Frame {
 
-    @Getter
-    @Setter
-    protected String firstChance;
-    @Setter
-    protected String secondChance;
+    @NonNull
+    protected List<String> chances;
     @Setter
     protected Frame nextFrame;
     protected Frame previousFrame;
     protected Integer score;
+
+    public TraditionalScoringFrame(@NonNull List<String> chances) {
+        this.chances = chances;
+    }
+
+    @Override
+    public String getFirstChance() {
+        return chances.get(0);
+    }
 
     @Override
     public Integer getScore() {
@@ -38,26 +44,14 @@ public abstract class TraditionalScoringFrame implements Frame {
         if (previousFrame != null) score += previousFrame.getScore();
     }
 
-    @Override
-    public Integer sayStrikeBonusToPrevious() {
-        return parseChance(firstChance) + parseChance(secondChance);
-    }
-
     public Integer parseChance(String chance) {
         if (OUTPUT_STRIKE.equals(chance)) {
             return MAX_CHANCE_SCORE;
         } else if (OUTPUT_SPARE.equals(chance)) {
-            return MAX_CHANCE_SCORE - parseInt(firstChance);
+            return MAX_CHANCE_SCORE - parseInt(getFirstChance());
         } else if (FOUL.equals(chance) || StringUtils.isEmpty(chance)) {
             return FOUL_SCORE;
         } else return parseInt(chance);
-    }
-
-    @Override
-    public String get() {
-        var pinfallsLine = firstChance + OUTPUT_TAB + secondChance + OUTPUT_TAB + OUTPUT_NEW_LINE;
-        var scoreLine = getScore() + OUTPUT_TAB + OUTPUT_TAB;
-        return pinfallsLine + scoreLine;
     }
 
 }
