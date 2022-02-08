@@ -9,15 +9,12 @@ import com.tinchop.bowling.parser.validation.TraditionalScoringBulkValidator;
 import com.tinchop.bowling.parser.validation.TraditionalScoringLineValidator;
 
 import java.io.FileNotFoundException;
-import java.util.function.Consumer;
 
 import static com.tinchop.bowling.constant.BowlingChallengeConstants.EXIT_CODE_UNSUCCESSFUL;
 import static com.tinchop.bowling.constant.BowlingChallengeMessages.NO_FILEPATH_PROVIDED_MSG;
 
 
 public class BowlingChallenge {
-
-    private static final Consumer<String> printer = System.out::println;
 
     public static void main(String[] args) {
 
@@ -31,16 +28,17 @@ public class BowlingChallenge {
 
         try {
             Printable game = Game.builder().parsedFile(parser.parse(filePath)).frameFactory(new TraditionalScoringFrameFactory()).build();
-            printer.accept(game.get());
+//            printer.accept(game.get());
+            System.out.println(game.get());
         } catch (FileNotFoundException | InvalidInputException e) {
-            printer.accept(e.getMessage());
+            System.out.println(e.getMessage());
         }
 
     }
 
     private static void validateArgs(String[] args) {
         if (args.length == 0) {
-            System.err.println(NO_FILEPATH_PROVIDED_MSG);
+            System.out.println(NO_FILEPATH_PROVIDED_MSG);
             System.exit(EXIT_CODE_UNSUCCESSFUL);
         }
     }

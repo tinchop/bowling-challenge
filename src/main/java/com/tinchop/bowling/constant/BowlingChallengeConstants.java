@@ -29,6 +29,8 @@ public class BowlingChallengeConstants {
     public static final String SCORES_FILEPATH = POSITIVE_FOLDER + "scores.txt";
     public static final String PERFECT_FILEPATH = POSITIVE_FOLDER + "perfect.txt";
     public static final String ZERO_FILEPATH = POSITIVE_FOLDER + "zero.txt";
+    public static final String THREE_PLAYER_GAME_FILEPATH = POSITIVE_FOLDER + "three-player-game.txt";
+    public static final String FOUR_PLAYER_GAME_FILEPATH = POSITIVE_FOLDER + "four-player-game.txt";
     public static final String NEGATIVE_FOLDER = "src/test/resources/negative/";
     public static final String EMPTY_FILEPATH = NEGATIVE_FOLDER + "empty.txt";
     public static final String FREE_TEXT_FILEPATH = NEGATIVE_FOLDER + "free-text.txt";
