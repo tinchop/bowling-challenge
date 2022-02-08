@@ -25,10 +25,9 @@ public class BowlingChallenge {
                 .lineValidator(new TraditionalScoringLineValidator())
                 .bulkValidator(new TraditionalScoringBulkValidator())
                 .build();
-
+        
         try {
             Printable game = Game.builder().parsedFile(parser.parse(filePath)).frameFactory(new TraditionalScoringFrameFactory()).build();
-//            printer.accept(game.get());
             System.out.println(game.get());
         } catch (FileNotFoundException | InvalidInputException e) {
             System.out.println(e.getMessage());
